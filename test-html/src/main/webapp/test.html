@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" name="Description" content="홈페이지만들기"
+    name="Keywords" content="홈페지만들기, 홈피,등등"
+    name="robots" content="noindex, nofollow">
+<title>현주의 홈페이지</title>
+
+<link href="test.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+    <h1 title="header">내 홈 첫페이지</h1>
+    
+    <div>
+        <h3>html5 header</h3>
+    </div>
+    <div>
+        <ul>
+            <li><a href="#">Menu - 1</a></li>
+            <li><a href="#">Menu - 2</a></li>
+            <li><a href="#">Menu - 3</a></li>
+        </ul>
+    </div>
+    <div>
+        <div>
+            <h4>안녕안녕반가워</h4>
+            <p>오늘도 참 즐겁게 보냈어</p>
+        </div>
+    </div>
+    <br><br><br><br><br><br><br>
+    <header>
+        <h3>html5 header</h3>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#">Menu - 1</a></li>
+            <li><a href="#">Menu - 2</a></li>
+            <li><a href="#">Menu - 3</a></li>
+        </ul>
+    </nav>
+    <section>
+        <article>
+            <h4>안녕안녕반가워</h4>
+            <p>오늘도 참 즐겁게 보냈어</p>
+        </article>
+    </section>
+    
+    <br><br><br><br><br><br><br><br><br>
+    <div>공간분할</div>
+    <div>공간분할</div>
+    <div>공간분할</div>
+    <div>공간분할</div>
+    
+    <span>span</span>
+    <span>span</span>
+    <span>span</span>
+    
+    <form>
+        <fieldset>
+            <legend>입력 양식</legend>
+            <table>
+                <tr>
+                    <td><label for="name">이름</label></td>
+                    <td><input id="name" type="text" /></td>
+                </tr>
+                <tr>
+                    <td><label for="mail">이메일</label></td>
+                    <td><input id="mail" type="email" /></td>
+                </tr>
+            </table>
+            <input type="submit" />
+        </fieldset>
+    </form>
+    
+    
+    <select>
+        <optgroup label="분식">
+	        <option>김밥</option>
+	        <option>떡볶이</option>
+	        <option>순대</option>
+	    </optgroup>
+	    <optgroup label="한식">
+            <option>불고기</option>
+            <option>제육볶음</option>
+            <option>삼겹살</option>
+        </optgroup>
+    </select>
+    
+    <select multiple="multiple">
+        <option>김밥</option>
+        <option>떡볶이</option>
+        <option>순대</option>
+    </select>
+    <select>
+        <option>김밥</option>
+        <option>떡볶이</option>
+        <option>순대</option>
+    </select>
+    <br><br><br>
+    <textarea>텍스트텍스트</textarea>
+    <br><br><br>
+    <form>
+        <input type="color" /><br>
+        <input type="date" /><br>
+        <input type="datetime" /><br>
+        <input type="range" /><br>
+    </form>
+    
+    <br><br><br>
+    <form>
+        <label for="name">이름</label>
+        <input id="name" type="button" /><br>
+        <input type="checkbox" /><br>
+        <input type="hidden" /><br>
+        <input type="radio" /><br>
+    </form>
+    
+    <br><br><br>
+    <form>
+        <input type="text" name="name" /><br>
+        <input type="password" name="password" /><br>
+        <input type="file" name="file" />
+        <input type="submit" />
+    </form>
+    <br><br><br>
+    <form method="get">
+        <input type="text" name="search" />
+        <input type="submit" />
+    </form>
+    
+    <form method="post">
+        <input type="text" name="search" />
+        <input type="submit" />
+    </form>
+    
+    <a href="http://github.com/">github</a><br>
+    <a href="#">언론사 전체보기</a><br>
+    <a href="#beta">move to beta</a>
+    
+    <table border="2">
+        <tr>
+            <th>열1</th>
+            <th>열2</th>
+       </tr>
+       <tr>
+            <td>행1</td>
+            <td>행1</td>
+       </tr>
+    </table>
+    
+    <table border="1">
+        <caption>Caption</caption>
+        <colgroup>
+            <col span="2" style="background: red" />
+            <col style="background: blue" />
+        </colgroup>
+        <thead style="background: green">
+            <tr>
+                <th>번호</th>
+                <th>이름</th>
+                <th>전화번호</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>현주</td>
+                <td>111-111</td>
+            <tr>
+            <tr>
+                <td>2</td>
+                <td>나비</td>
+                <td>222-222</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>고양이</td>
+                <td>333-333</td>
+            </tr>
+        </tbody>
+        <tfoot style="background: yellow">
+            <tr>
+                <td>4</td>
+                <td>haha</td>
+                <td>444-444</td>
+            </tr>
+        </tfoot>
+    </table>
+
+  <table border="1">
+    <tr>
+        <th colspan="3">번호</th>
+        <th rowspan="3">이름</th>
+    </tr>
+    <tr>
+        <td>11</td>
+        <td rowspan="2">22</td>
+        <td>333</td>
+    </tr>
+    <tr>
+        <td>44</td>
+        <td>55</td>
+    </tr>
+  </table>
+    <img src="rose1.jpg" alt="장미1" width="300" />
+    <img src="rose2.jpg" alt="장미2" width="400" />
+        <img src="Nothing" alt="그림이 존재하지 않습니다." width="400" />
+    <h1>ol tag</h1>
+    <ol>
+        <li>Facebook</li>
+        <li>daum</li>
+    </ol>
+    <ul>
+        <li>Facebook</li>
+        <li>daum</li>
+    </ul>
+    <dl>
+        <dt>html5</dt>
+        <dd>아이구우</dd>
+        <dd>당황스럽네</dd>
+        
+        <dt>에이치티엠엘5</dt>
+        <dd>아이구우</dd>
+        <dd>당황스럽네</dd>
+    </dl>
+    
+    <h2>하하</h2>
+    <h2><b>히ㅏ히</b></h2>
+    <h2><sup>위에달라붙어?</sup></h2>
+    <h2><b>히ㅏ히</b></h2>
+    <h6>호호</h6>
+    <ruby>
+        <span>大韓</span>
+        <rt>대한</rt>
+    </ruby>
+    <p>hello world!!!!!</p>
+    <div>
+        <div>
+            <p>
+            흐흐흐흐흐흐
+            </p>
+        </div>
+    </div>
+    <h1 id="beta">beta</h1>
+    <p>감사합니다.</p>
+</body>
+</html>
