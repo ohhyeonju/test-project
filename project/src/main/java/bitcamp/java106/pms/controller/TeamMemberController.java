@@ -12,15 +12,15 @@ public class TeamMemberController {
     Scanner keyScan;
     TeamDao teamDao;
     MemberDao memberDao;
-    TeamMemberDao teamMemberDao; 
-    public TeamMemberController(Scanner keyScan, TeamDao teamDao, 
-            MemberDao memberDao, TeamMemberDao teamMemberDao) {
+    TeamMemberDao teamMemberDao;
+
+    public TeamMemberController(Scanner keyScan, TeamDao teamDao, MemberDao memberDao, TeamMemberDao teamMemberDao) {
         this.keyScan = keyScan;
         this.teamDao = teamDao;
         this.memberDao = memberDao;
         this.teamMemberDao = teamMemberDao;
     }
-           
+
     public void service(String menu, String option) {
         if (menu.equals("team/member/add")) {
             onTeamMemberAdd(option);
@@ -32,29 +32,29 @@ public class TeamMemberController {
             System.out.println("명령어가 올바르지 않습니다.");
         }
     }
-    
+
     void onTeamMemberAdd(String teamName) {
         if (teamName == null) {
             System.out.println("팀명을 입력하시기 바랍니다.");
             return;
         }
-        
+
         Team team = teamDao.get(teamName);
         if (team == null) {
             System.out.printf("%s 팀은 없습니다.", teamName);
             return;
         }
-        
+
         System.out.println("[팀 멤버 추가]");
         System.out.print("추가할 멤버의 아이디는? ");
         String memberId = keyScan.nextLine();
-        
+
         Member member = memberDao.get(memberId);
         if (member == null) {
             System.out.printf("%s 회원은 없습니다.", memberId);
             return;
         }
-        
+
         if (teamMemberDao.isExist(teamName, memberId)) {
             System.out.println("이미 등록된 회원입니다");
             return;
@@ -62,52 +62,53 @@ public class TeamMemberController {
         teamMemberDao.addMember(teamName, memberId);
         System.out.println("추가하였습니다.");
     }
-    
+
     void onTeamMemberList(String teamName) {
         if (teamName == null) {
             System.out.println("팀명을 입력하시기 바랍니다.");
             return;
         }
-        
+
         Team team = teamDao.get(teamName);
         if (team == null) {
             System.out.printf("%s 팀은 없습니다.", teamName);
             return;
         }
-        
+
         System.out.println("[팀 멤버 목록]");
         System.out.print("회원들: ");
-        
+
         String[] members = teamMemberDao.getMembers(teamName);
-        
+
         for (int i = 0; i < members.length; i++) {
-            if (members[i] == null) continue;
-            System.out.printf("%s, " , members[i]);
+            System.out.printf("%s, ", members[i]);
         }
+        System.out.println();
     }
+
     void onTeamMemberDelete(String teamName) {
         if (teamName == null) {
             System.out.println("팀명을 입력하시기 바랍니다.");
             return;
         }
-        
+
         Team team = teamDao.get(teamName);
         if (team == null) {
             System.out.printf("%s 팀은 없습니다.", teamName);
             return;
-            
-        } 
+
+        }
         System.out.print("삭제할 팀원은? ");
         String memberId = keyScan.nextLine();
-        
+
         if (!teamMemberDao.isExist(teamName, memberId)) {
             System.out.println("이 팀의 회원이 아닙니다.");
             return;
         }
-        
+
         teamMemberDao.deleteMember(teamName, memberId);
         System.out.println("삭제하였습니다.");
-        
+
     }
-    
+
 }

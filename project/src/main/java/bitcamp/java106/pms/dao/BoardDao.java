@@ -6,11 +6,11 @@ import bitcamp.java106.pms.domain.Board;
 
 public class BoardDao {
     private ArrayList collection = new ArrayList();
-    
+
     public void insert(Board board) {
         this.collection.add(board);
     }
-    
+
     public Board[] list() {
         Board[] arr = new Board[collection.size()];
         for (int i = 0; i < collection.size(); i++) {
@@ -18,7 +18,7 @@ public class BoardDao {
         }
         return arr;
     }
-    
+
     private int getBoardIndex(int no) {
         for (int i = 0; i < collection.size(); i++) {
             Board originBoard = (Board) collection.get(i);
@@ -28,21 +28,21 @@ public class BoardDao {
         }
         return -1;
     }
-    
+
     public Board get(int no) {
         int index = this.getBoardIndex(no);
         if (index < 0)
             return null;
         return (Board) collection.get(index);
     }
-    
+
     public void update(Board board) {
         int index = this.getBoardIndex(board.getNo());
         if (index < 0)
             return;
         collection.set(index, board);
     }
-    
+
     public void delete(int no) {
         int index = this.getBoardIndex(no);
         if (index < 0)
