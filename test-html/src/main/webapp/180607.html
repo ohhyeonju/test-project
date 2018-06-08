@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+  var input = prompt('숫자를 입력해주세요.', '숫자');
+  var numberInput = Number(input);
+  alert(typeof(numberInput) + ': ' + numberInput);
+
+  var grades = {
+    'list' : {'aaa': 10, 'bbb': 3, 'ccc': 4},
+    'show' : function() {
+      for (var name in this.list) {
+        document.write(name + ':' + this.list[name] + '<br>');
+      }
+    }
+  };
+  grades.show();
+</script>
+
+</body>
+</html>
