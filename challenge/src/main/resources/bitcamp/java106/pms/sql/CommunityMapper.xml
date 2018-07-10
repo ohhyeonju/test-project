@@ -9,13 +9,18 @@
      단순히 알아보기 쉬울 뿐만 아니라 
      스프링 프레임워크와 연동할 때 DAO 객체를 자동 생성할 수 있다. 
 -->
-<mapper namespace="bitcamp.java106.pms.dao.BoardDao">
-  <resultMap type="Board" id="BoardMap">
-    <id column="bno" property="no"/>
-    <result column="titl" property="title"/>
-    <result column="cont" property="content"/>
-    <result column="cdt" property="createdDate"/>
+<mapper namespace="bitcamp.java106.pms.dao.CommunityDao">
+  <resultMap type="Community" id="CommunityMap">
+    <id column="pono" property="no"/>
+    <result column="pocont" property="content"/>
+    <result column="podate" property="createdDate"/>
+    <result column="cmut" property="title"/>
+    <result column="cmu_cnt" property="cnt"/>
+    <result column="cmu_type" property="type"/>
+    <result column="cmu_lk" property="like"/>
+    <result column="uno" property="user"/>
   </resultMap>
+  
   
   <!-- SQL 문 id를 설정할 때 SQL문을 사용하는 메서드 이름과 같게하면
        유지보수할 때 알아보기 쉽다. 
@@ -24,39 +29,40 @@
        그 메서드를 자동생성할 때 사용할 수 있다.
   -->
   <select id="selectList" 
-          resultMap="BoardMap" 
+          resultMap="CommunityMap" 
           parameterType="map">
-    select bno, titl, cdt 
-    from pms2_board
-    order by bno desc
-    limit #{startRowNo}, #{pageSize}
+    select pono, cmu_type, cmut, u.uno, cmu_cnt, podate 
+    from CMU c 
+    inner join USER u on c.uno=u.uno 
+    inner join POST p on c.CMUNO=p.PONO
+    <!-- limit #{startRowNo}, #{pageSize} -->
+    
   </select>
   
-  <insert id="insert" parameterType="Board"
-          useGeneratedKeys="true" keyColumn="bno" keyProperty="no">
-    insert into pms2_board(titl,cont,cdt) 
-    values(#{title},#{content},now())
+  <insert id="insert" parameterType="Community"
+          useGeneratedKeys="true" keyColumn="pono" keyProperty="pono">
+    insert into POST(pocont,podate) 
+    values(#{content},now())
   </insert>
   
   <!-- 파라미터의 타입이 primitive type이나 wrapper 클래스, String 클래스인 경우
        값을 꺼낼 때 프로퍼티 이름을 마음대로 해도 된다.
   -->
-  <select id="selectOne" parameterType="int" resultMap="BoardMap">
-    select bno,titl,cont,cdt 
-    from pms2_board 
-    where bno=#{value}
+  <select id="selectOne" parameterType="int" resultMap="CommunityMap">
+    select pono, pocont, podate 
+    from POST 
+    where pono=#{value}
   </select>
   
-  <update id="update" parameterType="Board">
-    update pms2_board set 
-        titl=#{title}, 
-        cont=#{content}, 
-        cdt=now()
-    where bno=#{no}
+  <update id="update" parameterType="Community">
+    update POST set 
+        pocont=#{content}, 
+        podate=now()
+    where pono=#{no}
   </update>
   
   <delete id="delete" parameterType="int">
-    delete from pms2_board where bno=#{value}
+    delete from POST where pono=#{value}
   </delete>
 </mapper>
 
