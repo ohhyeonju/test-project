@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>회원페이지</title>
+<link rel="stylesheet" href="../history.css">
+<link rel="stylesheet" href="/challenge-project/html7/sm/sm-memberPage.css">
+<link rel="stylesheet" href="/challenge-project/html7/css/common.css">
+<link rel="stylesheet" href="/challenge-project/html7/node_modules/@fortawesome/fontawesome-free/css/all.css">
+  <link href="https://fonts.googleapis.com/css?family=Titillium+Web:900" rel="stylesheet">
+<style type="text/css">
+#sh_top_layout {
+  border-bottom: none!important;
+}
+
+.sm-time {
+  margin: 0;
+  padding: 10px;
+
+  /* background-color: #ddd; */
+  background-color: #1B3453;
+  color:white;
+  border-bottom: none;
+  display: block;
+  text-align: center;
+  font-weight: 800;
+}
+.sm-time-div {
+  padding:0!important;
+}
+
+.sm-time-p {
+  padding: 5px 10px;
+}
+.sm-time-img {
+  display: block;
+  height: 120px;
+  width: 150px;
+  margin-bottom: 15px;
+  margin-left: 28%;
+}
+
+</style>
+</head>
+<body>
+
+
+<div class="sm-top-bar-white">
+  <div class="sm-container">
+
+    <!-- 헤더 시작 -->
+    <div id="header"></div>
+    <!-- 헤더 종료-->
+
+
+    <!-- 상단 메뉴바 시작 -->
+    <div id="mb-menu"></div>
+    <!-- 상단 메뉴바 종료 -->
+  </div><!-- container -->
+</div><!-- top-bar-white -->
+
+
+
+
+<div id="sm-back">
+<div class="sm-container">
+  <h2><b>운동관리</b></h2>
+
+<div class="sm-mypage">
+	<div class="sm-profile">
+		<div style="text-align: center;">
+			<img src="../img/img1.jpg" style="margin-left: 30px; border-radius:60px; width:120px; height:120px;">
+      <button id="sm-btn-2" type="button" style="position:relative; top:-10px; right:40px; width:30px; height:30px; border-radius:15px; padding:0px;font-size:14px;"><span>2</span></button>
+      <br>
+			사용자이름<br>
+      <button id="sm-btn-2" type="button" style="margin-top:10px; margin-bottom:20px;">나의 팔로잉</button>
+		</div>
+    <div class="sm-menu" style="border-left:none;"><i class="fas fa-history"></i><br>히스토리</div>
+    <div class="sm-menu"><i class="fas fa-edit"></i><br>운동일지 관리</div>
+    <div class="sm-menu" style="border-left:none;"><i class="fas fa-file-alt"></i><br>진행중인 운동</div>
+    <div class="sm-menu" style="border-bottom:1px solid gray;"><i class="far fa-credit-card"></i><br>구매내역</div>
+    <div class="sm-menu" style="border-left:none; border-right:1px solid gray;"><i class="fas fa-redo"></i><br>취소/환불내역</div>
+	</div><!-- .profile -->
+
+
+
+    <div class="sm-mypage-body">
+      <h3 class="sm-margin-none" style="color:#666666;">히스토리</h3>
+      <hr style="margin-bottom:30px;">
+
+
+<!-- 이 부분이 운동일지 부분임! -->
+<section id="sm-section" class="sm-timeline">
+  <ul>
+    <li>
+      <div class="sm-time-div">
+        <span class="sm-time">2011-02-03</span>
+        <p class="sm-time-p"> '3개월 하비탈출!' 결제를 완료했습니다! </p>
+      </div>
+    </li>
+    <li>
+      <div class="sm-time-div">
+        <span class="sm-time">2011-02-03</span>
+        <p class="sm-time-p">
+          <img class="sm-time-img" src="../img/img1.jpg">
+          '1개월만에 다리라인 만들기' 태권도 챌린지를 시작헀습니다!
+        </p>
+      </div>
+    </li>
+    <li>
+      <div class="sm-time-div">
+        <span class="sm-time">2018-02-03</span>
+        <p class="sm-time-p"> '1개월만에 다리라인 만들기' 결제를 완료했습니다! </p>
+      </div>
+    </li>
+    <li>
+      <div class="sm-time-div">
+        <span class="sm-time">2011-02-03</span>
+        <p class="sm-time-p"> '3개월 하비탈출!' 챌린지 시작! </p>
+      </div>
+    </li>
+    <li>
+      <div class="sm-time-div">
+        <span class="sm-time">2011-02-03</span>
+        <p class="sm-time-p">
+          <img class="sm-time-img" src="../img/img3.jpg">
+          '비키니 몸매를 위해 3주만 투자하라!' 챌린지를 성공했습니다!
+        </p>
+      </div>
+    </li>
+    <li>
+      <div class="sm-time-div">
+        <span class="sm-time">2011-02-03</span>
+        <p class="sm-time-p"> '3개월 하비탈출!' 챌린지 시작! </p>
+      </div>
+    </li>
+    <li>
+      <div class="sm-time-div">
+        <span class="sm-time">2011-02-03</span>
+        <p class="sm-time-p"> '3개월 하비탈출!' 챌린지 시작! </p>
+      </div>
+    </li>
+    <li>
+      <div class="sm-time-div">
+        <span class="sm-time">2011-02-03</span>
+        <p class="sm-time-p"> '3개월 하비탈출!' 챌린지 시작! </p>
+      </div>
+    </li>
+  </ul>
+</section>
+</div>
+
+
+
+
+    </div><!-- mypage-body -->
+
+
+</div><!-- mypage -->
+</div><!--.container-->
+
+<!-- 푸터 시작 -->
+
+<div id="footer"></div>
+<!-- 푸터 종료 -->
+
+
+</div><!-- back -->
+
+
+
+
+
+<script> // 탭 메뉴
+function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+</script>
+ <script src="../history.js"></script>
+<script src="/challenge-project/html7/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/challenge-project/html7/header/js/header_white_login.js"></script>
+<script src="/challenge-project/html7/footer/js/footer.js"></script>
+<script src="../js/mb-menu.js"></script>
+</body>
+</html>

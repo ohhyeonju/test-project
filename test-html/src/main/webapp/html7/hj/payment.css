@@ -1,0 +1,102 @@
+@charset "UTF-8";
+
+<!-- 초기화 -->
+* { 
+    margin: 0; padding: 0;
+}
+img { border: 0; }
+ul { list-style: none; }
+
+<!-- 헤더 -->
+
+#main_header > div.logo {
+    position: absolute;
+    left: 15px; top: 10px;
+}
+    
+<!-- 본문 -->
+
+div {
+  display: block;
+}
+
+.panel-body {
+    padding: 10px;
+}
+
+#content { 
+    margin-top: 10px; 
+    width: 900px;
+}
+
+#product-img {
+    width: 120px;
+    border-radius: 10px;
+    vertical-align: middle;
+    margin-right: 20px;
+    float: left;
+}
+#product-title {
+    height: 50px;
+    line-height: 23px;
+    display: block;
+}
+#customer-img {
+    border-radius: 500px;
+    width: 20px;
+    vertical-align: middle;
+}
+#customer { color: #878787; }
+
+#order-table {
+    margin-top: 25px;
+}
+
+#auth-img {
+    float: left;
+    position: relative;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.data-width {
+    width: 50%;
+}
+#payment1 {
+    width:58.333333%;
+    float: left;
+}
+
+#payment1 > h3 {
+    float: right;
+}
+
+#payment-button-body {
+	height: 100px;
+}
+
+<!-- 풋터 -->
+#footer-body {
+	height: 600px;
+}
+#footer-body > ul { 
+	width: 700px;
+	overflow: hidden;
+	margin : 0 auto;
+}
+#footer-body > ul > li {
+	display: inline;
+	float: left; 
+	text-align: center;
+}
+#footer-body > ul > li:nth-child(2n) {
+	width: 30px;
+}
+#notice {
+	width: 75%;
+	float:left;
+}
+#call {
+	width: 25%;
+	float:left;
+}
