@@ -31,10 +31,11 @@
   <select id="selectList" 
           resultMap="CommunityMap" 
           parameterType="map">
-    select pono, cmu_type, cmut, u.uno, cmu_cnt, podate 
+    select pono, cmu_type, cmut, u.uname, cmu_cnt, podate 
     from CMU c 
     inner join USER u on c.uno=u.uno 
     inner join POST p on c.CMUNO=p.PONO
+    order by pono desc
     <!-- limit #{startRowNo}, #{pageSize} -->
     
   </select>

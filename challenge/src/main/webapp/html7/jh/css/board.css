@@ -7,6 +7,7 @@
   
 }
 
+
 .jumbotron-heading {
   font-size: 25px;
   font-weight: bold;
@@ -21,7 +22,6 @@
 main {
     width: 1200px;
     margin: 0 auto;
-    position: relative;
 }
 
 .jh-boarder-layout {
