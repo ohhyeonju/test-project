@@ -39,7 +39,7 @@
   
   <select id="selectListCard" 
           resultMap="ProgramMap" parameterType="map">
-    select pname, pth, pprice, bas_addr, maxqty, sdt 
+    select pno, pname, pth, pprice, bas_addr, maxqty, sdt 
     from PROG
     <!-- limit #{startRowNo}, #{pageSize} -->
   </select>
