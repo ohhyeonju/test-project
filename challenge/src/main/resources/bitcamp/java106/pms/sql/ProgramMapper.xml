@@ -29,18 +29,30 @@
     
     <result column="cno" property="challengeNo"/>
     <result column="plno" property="planNo"/>
-    <result column="trnno" property="trainerNo"/>
+    
+    <association property="trainerNo" javaType="Trainer">
+      <id column="uno" property="userNo"/>
+      <result column="uname" property="name"/>
+      <result column="upath" property="userPath"/>
+    </association>
         
-    <!-- <collection property="members" ofType="Member">
-        <id column="mid" property="id"/>
-        <result column="email" property="email"/>
-    </collection> -->
+    <collection property="medias" ofType="ProgramMedia">
+        <id column="pmedno" property="no"/>
+        <result column="ppath" property="path"/>
+        <result column="pmtype" property="state"/>
+        <result column="pno" property="program"/>
+    </collection>
   </resultMap>
   
   <select id="selectListCard" 
           resultMap="ProgramMap" parameterType="map">
-    select pno, pname, pth, pprice, bas_addr, maxqty, sdt 
-    from PROG
+    select p.pno, p.pname, p.pth, p.pprice, p.bas_addr, p.maxqty, p.sdt, 
+           m.pmedno, m.ppath, m.pmtype,
+           u.upath, u.uname
+    from PMED m 
+         right outer join PROG p on m.pno=p.pno
+         left outer join TRN t on p.trnno=t.trnno
+         left outer join USER u on t.trnno=u.uno
     <!-- limit #{startRowNo}, #{pageSize} -->
   </select>
   

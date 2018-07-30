@@ -2,6 +2,7 @@ package bitcamp.java106.pms.domain;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -33,8 +34,16 @@ public class Program implements Serializable {
     
     private int challengeNo; // 챌린지번호
     private int planNo; // 운동계획서번호
-    private int trainerNo; // 트레이너번호
+    private Trainer trainerNo; // 트레이너번호
     
+    private List<ProgramMedia> medias; // 프로그램 미디어
+    
+    public List<ProgramMedia> getMedias() {
+        return medias;
+    }
+    public void setMedias(List<ProgramMedia> medias) {
+        this.medias = medias;
+    }
     public int getNo() {
         return no;
     }
@@ -167,10 +176,11 @@ public class Program implements Serializable {
     public void setPlanNo(int planNo) {
         this.planNo = planNo;
     }
-    public int getTrainerNo() {
+    public Trainer getTrainerNo() {
         return trainerNo;
     }
-    public void setTrainerNo(int trainerNo) {
+    public void setTrainerNo(Trainer trainerNo) {
         this.trainerNo = trainerNo;
     }
+    
 }

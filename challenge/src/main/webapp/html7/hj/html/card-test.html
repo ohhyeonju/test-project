@@ -10,30 +10,34 @@
 </head>
 
 <body>
-  <div class="card" id="card">
-    <a href="#">
-    <!-- 카드 헤더 -->
-    <div class="card-header" id="card0">
-      <div class="ribbon"><span>성공 98%</span></div>
-      <div class="card-trainer"></div>
-    </div>
-    <!--  카드 바디 -->
-    <div class="card-body" id="aaa"></div>
-    </a>
-  </div>
-  <div id="bbb"></div>
+  <div id="aaa"></div>
 <script id="cardBody2" type="text/x-handlebars-template">
 {{#each list}}
-<span class="card-body-title">{{name}}</span>
-<span class="card-body-degree">[{{proTh}}기]</span>
-<p class="card-body-price">{{price}}원</p>
-<span class="card-body-local">{{address}}</span>
-<span class="card-body-number">/{{maxQty}}명</span>
-<p class="card-body-score"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></p>
-<!--  카드 바디 푸터 -->
-<div class="card-footer">
-  <span class="card-footer-review">리뷰 개</span>
-  <span class="card-footer-date">{{startDate}}(D- )</span>
+<div class="card" id="card">
+    <a href="#">
+    <!-- 카드 헤더 -->
+    <div class="card-header">
+      <img class="card-img" src="../img/{{medias.[0].path}}"/>
+      <div class="ribbon"><span>성공 %</span></div>
+      <div class="card-trainer">
+        <img class="trainer-img" src="../img/{{trainerNo.userPath}}"/>
+      </div>
+    </div>
+    <!--  카드 바디 -->
+    <div class="card-body">
+      <span class="card-body-title">{{name}}</span>
+      <span class="card-body-degree">[{{proTh}}기]</span>
+      <p class="card-body-price">{{price}}원</p>
+      <span class="card-body-local">{{address}}</span>
+      <span class="card-body-number">/{{maxQty}}명</span>
+      <p class="card-body-score"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></p>
+      <!--  카드 바디 푸터 -->
+      <div class="card-footer">
+      <span class="card-footer-review">리뷰 개</span>
+      <span class="card-footer-date">{{startDate}}(D- )</span>
+    </div>
+    </a>
+</div>
 {{/each}}
 </script>
 <script src="../../node_modules/handlebars/dist/handlebars.min.js"></script>
