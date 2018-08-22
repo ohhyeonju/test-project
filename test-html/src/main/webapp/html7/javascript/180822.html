@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>180822</title>
+</head>
+<body>
+
+<script type="text/javascript"> 
+console.log('즐겁게 \'신나게\' \n하하하')
+console.log(10 % 3)
+console.log(100 < 50)
+var fun = function () {};
+
+var input = prompt('숫자입력', '숫자');
+console.log(typeof(input));
+console.log(Number(input))
+
+var input1 = confirm('수락?');
+console.log(input1);
+
+console.log(!!0)
+
+var variable = 200;
+console.log(`변수 variable의 값은 ${variable}입니다.`)
+
+const constant = 222;
+let letlet = 111;
+letlet = 111;
+/* constant = 222; */
+/* const constant; */
+
+window.onload = function() {
+  var list = '';
+  
+  list += '<ul>';
+  list += '    <li>Hello</li>';
+  list += '</ul>';
+  
+  document.body.innerHTML = list;
+}
+
+
+for (var i = 0; i < 3; i++) {
+  // 1초(1000밀리 초) * i초 후에 i를 출력
+  setTimeout(() => {
+    console.log(i);
+  }, 1000 * i);
+}
+
+
+for (var i = 0; i < 3; i++) {
+  // 1초(1000밀리 초) * i초 후에 i를 출력
+  ((i) => {
+    setTimeout(() => {
+      console.log(i)
+    }, 1000 * i);
+  })(i);
+}
+
+for (let i = 0; i < 3; i++) {
+  // 1초(1000밀리 초) * i초 후에 i를 출력
+  setTimeout(() => {
+    console.log(i)
+  }, 1000 * i);
+}
+</script>
+</body>
+</html>
