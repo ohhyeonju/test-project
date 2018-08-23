@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>180823</title>
+</head>
+<body>
+
+<script type="text/javascript"> 
+var date = new Date();
+var hour = date.getHours();
+
+if (hour < 12) {
+  console.log('오전')
+} else {
+  console.log('오후')
+}
+
+var score = Number(prompt('학점을 입력하세요', '학점'))
+
+if (4.0 < score && score < 4.5) {
+  console.log('A')
+}
+
+switch (score % 2) {
+case 0:
+  console.log('짝수')
+  break;
+case 1:
+  console.log('홀수')
+  break;
+default:
+  console.log('그외')
+  break;
+}
+
+(score > 4) ? console.log('A') : console.log('흠')
+    
+score % 2 == 0 || console.log('홀수입니다')
+score % 2 == 0 && console.log('짝수입니다')
+
+score % 4 == 0 && console.log('4로 나눌 수 있는 숫자')
+if (score > 0) {
+  console.log('양수')
+} else if (score == 0) {
+  console.log('0입니다.')
+} else if (score < 0){
+  console.log('음수')
+}
+
+var input = prompt('문자열 입력','')
+if (input.indexOf('안녕') == 0) {
+  console.log('안녕하세요')
+} else if (input.indexOf('잘자') == 0 || input.indexOf('잘 자') == 0) {
+  console.log('안녕히 주무세요')
+} else {
+  console.log('인사를 안해?')
+}
+
+
+</script>
+</body>
+</html>
