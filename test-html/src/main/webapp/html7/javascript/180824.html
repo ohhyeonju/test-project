@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>180824</title>
+</head>
+<body>
+
+<script type="text/javascript"> 
+var array = [0, 1]
+array.push(2);
+console.log(array)
+
+var a = 'abcd'
+console.log(a[0], a[3])
+
+var value = 0;
+var startTime = new Date().getTime();
+console.log(startTime)
+while (new Date().getTime() < startTime + 1000) {
+  value++;
+}
+console.log(value);
+
+array = ['포도', '사과', '바나나', '망고'];
+for (var i = array.length -1; i >= 0; i--) {
+  console.log(array[i])
+}
+
+for (var cps = 0; new Date().getTime() < startTime + 1000; cps++) {}
+console.log('초 당 연산 횟수: ' + cps);
+
+for (var i in array) {
+  console.log(array[i])
+}
+
+var output = '';
+for (var i = 0; i < 10; i++) {
+  for (var j = 0; j < i; j++) {
+    output += '*';
+  }
+  output += '\n';
+}
+console.log(output)
+
+output = '';
+for (var i = 0; i < 15; i++) {
+  for (var j = 15; j > i; j--) {
+    output += ' ';
+  }
+  for (var k = 0; k < 2 * i - 1; k++) {
+    output += '*';
+  }
+  output += '\n'
+}
+console.log(output)
+
+
+for (var i = 0; true; i++) {
+  console.log(i + '번째 반복문')
+  
+  if (!confirm('계속하시겠습니까?')) {
+    break;
+  }
+}
+console.log('프로그램 종료')
+
+output = 0;
+for (var i = 1; i <= 10; i++) {
+  if (i % 2 == 1) {
+    continue;
+  }
+  output += i;
+}
+console.log(output)
+
+array = [1, 2, 3, 4];
+for (var i in array)
+  console.log(i + '번째 요소는 ' + array[i])
+
+for (const element of [1, 2, 3, 4]) {
+  console.log(`요소는 ${element}`)
+}
+
+while (true) {
+  var answer = prompt('입력','')
+  var time = new Date().getTime();
+  console.log(time)
+  if (answer == '잘있어') {
+    break;
+  }
+}
+
+var plus = 0;
+var multiply = 1;
+for (var i = 1; i <= 100; i++) {
+  plus += i;
+  multiply *= i;
+}
+console.log(plus)
+console.log(multiply)
+
+var arr = [3, 4, 1, 5, 7, 9, 2];
+var min = 1000, max = -100;
+for (var i = 0; i < arr.length; i++) {
+  if (max < arr[i]) {
+    max = arr[i];
+  } 
+  if (min > arr[i]) {
+    min = arr[i]
+  }
+}
+console.log(max, min)
+</script>
+</body>
+</html>
