@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>180825</title>
+</head>
+<body>
+
+<script type="text/javascript"> 
+함수();
+var 함수 = function () { console.log('함수 A') };
+var 함수 = function () { console.log('함수 B') };
+function 함수() { console.log('함수 C') }
+function 함수() { console.log('함수 D') }
+함수();
+
+var array1 = Array();
+var array2 = Array(10);
+var array3 = Array(1, 2, 3, 4);
+console.log(array1 + '\n' + array2 + '\n' + array3)
+
+function sumAll() {
+  var output = 0;
+  for (var i = 0; i < arguments.length; i++) {
+    output += arguments[i];
+  }
+  console.log(typeof (arguments) + ' : ' + arguments.length);
+  return output;
+}
+sumAll(1, 2, 3, 4, 5, 6, 7, 8, 9);
+console.log(sumAll(1, 2, 3, 4, 5, 6, 7, 8, 9))
+
+// 피타고라스 함수
+function pythagoras(width, height) {
+  function square(x) {
+    return x * x;
+  }
+  return Math.sqrt(square(width) + square(height))
+}
+
+function callTenTimes(callback) {
+  for (var i = 0; i < 10; i++) {
+    callback();
+  }
+}
+callTenTimes(function () {
+  console.log('함수 호출')
+})
+
+function test(name) {
+  var output = 'Hello ' + name + '..!';
+  return function () {
+    console.log(output);
+  }
+}
+var test_1 = test('Web');
+var test_2 = test('JavaScript');
+test_1();
+test_2();
+
+setTimeout(function () {
+  console.log('3초가 지났음')
+}, 3000);
+
+var intervalID = setInterval(function () {
+  console.log(new Date())
+}, 1000);
+setTimeout(function () {
+  clearInterval(intervalID);
+}, 10000);
+
+var URI = 'http://www.hyeonju.xyz?test=한글';
+var output = '';
+output += 'escape()\n';
+output += escape(URI) +'\n\n';
+output += 'encodeURI()\n';
+output += encodeURI(URI) +'\n\n';
+output += 'encodeURIComponent()\n';
+output += encodeURIComponent(URI) +'\n\n';
+console.log(output)
+
+var willEval = '';
+willEval += 'var number = 10;';
+willEval += 'console.log(number);';
+eval(willEval);
+console.log(number)
+
+var number = 1 / 0;
+console.log(number + ' : ' + isFinite(number))
+
+if (isNaN(NaN)) {
+  console.log('NaN == NaN');
+} else {
+  console.log('NaN != NaN');
+}
+
+var won = '1000원';
+var dallar = '1.5$';
+console.log(Number(won), Number(dallar));
+console.log(parseInt(won), parseInt(dallar));
+console.log(parseFloat(won), parseFloat(dallar));
+
+for (var i = 0; i < 3; i++) {
+  (function (closed_i) {
+    setTimeout(function () {
+      console.log(closed_i)
+    }, 0)
+  })(i);
+}
+
+[0, 1, 2].forEach(function (i) {
+  setTimeout(function() {
+    console.log(i);
+  }, 0);
+})
+
+function test3(a, b, c) {
+  b = b || 3;
+  c = c || 5;
+  console.log(a + ' : ' + b + ' : ' + c)
+}
+test3(1, 2);
+
+function test4(a, b = 3, c = 5) {
+  console.log(a + ' : ' + b + ' : ' + c);
+}
+test4(1, 2);
+
+const multiply = (a, b) => a * b;
+console.log(multiply(9, 2));
+
+function test5(...numbers) {
+  console.log(numbers[0]);
+  console.log(numbers[1]);
+  console.log(numbers[2]);
+}
+test5(1, 2, 3)
+
+function test6(a, b, ...numbers) {
+  console.log(numbers);
+  alert(numbers)
+}
+test6(1, 2, 3, 4, 5, 6, 7)
+
+function test7(a, b, c, d) {
+  console.log('test7: ' + a + ':' +  b + ':' + c + ':' + d)
+}
+var array = [1, 2, 3, 4]
+test7.apply(null, array);
+
+function test8(a, b, c, d) {
+  console.log(`test8: ${a},${b},${c},${d}`);
+}
+test8(...array);
+array = [1, 2];
+test8(222, 111, ...array);
+test8(...array, ...array);
+
+function power(a, b) {
+  if (b) {
+    var output = 1;
+    for (var i = 0; i < b; i++) {
+      output = output * a;
+    }
+    return output;
+  } else {
+    return a * a;
+  }
+}
+console.log(power(3))
+console.log(power(2, 4));
+function multiply2() {
+  var output = 1;
+  for (var i = 0; i < arguments.length; i++) {
+    output = output * arguments[i];
+  }
+  return output;
+}
+console.log(multiply2(3,2,4))
+
+function isNumber(input) {
+  if (inNaN(Number(input))) {
+    return false;
+  } else {
+    return true; 
+  }
+}
+</script>
+</body>
+</html>
