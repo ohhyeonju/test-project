@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>180826 객체</title>
+</head>
+<body>
+
+	<script type="text/javascript"> 
+var person = {
+    name: '현주',
+    eat: function (food) {
+      console.log(this.name + '가 ' + food + '을/를 먹다');
+    }
+};
+person.eat('밥')
+var output = '';
+for (var key in person) {
+  output += 'ㅇ' + key + ': ' + person[key] + '\n';
+}
+console.log(output)
+
+output = '';
+var student = {
+  이름: '호호',
+  국어: 92, 수학: 98,
+  영어: 96, 과학: 98
+};
+output += "'이름' in student: " + ('이름' in student) + '\n';
+output += "'성별' in student: " + ('성별' in student);
+console.log(output)
+
+output = '';
+with (student) {
+  output += '이름: ' + 이름 + '\n';
+  output += '국어: ' + 국어 + '\n';
+  output += '수학: ' + 수학 + '\n';
+  output += '영어: ' + 영어 + '\n';
+  output += '과학: ' + 과학 + '\n';
+  output += '총점: ' + (국어 + 수학 + 영어 + 과학);
+}
+console.log(output)
+
+student.취미 = '악기';
+student.특기 = '프로그래밍';
+
+student.toString = function () {
+  var output1 = '';
+  for (var key in this) {
+    if (key != 'toString') {
+      output1 += key + '\t' + this[key] + '\n';
+    }
+  }
+  return output1;
+}
+console.log(student.toString())
+
+delete(student.취미)
+console.log(student)
+
+// 학생 정보 배열을 만듭니다.
+var students = [];
+// 배열에 요소를 넣습니다.
+students.push({ 이름: '윤인성', 국어: 87, 수학: 98, 영어: 88, 과학: 95 });
+students.push({ 이름: '연하진', 국어: 92, 수학: 98, 영어: 96, 과학: 98 });
+students.push({ 이름: '구지연', 국어: 76, 수학: 96, 영어: 94, 과학: 90 });
+students.push({ 이름: '나선주', 국어: 98, 수학: 92, 영어: 96, 과학: 92 });
+students.push({ 이름: '윤아린', 국어: 95, 수학: 98, 영어: 98, 과학: 98 });
+students.push({ 이름: '윤명월', 국어: 64, 수학: 88, 영어: 92, 과학: 92 });
+students.push({ 이름: '김미화', 국어: 82, 수학: 86, 영어: 98, 과학: 88 });
+students.push({ 이름: '김연화', 국어: 88, 수학: 74, 영어: 78, 과학: 92 });
+students.push({ 이름: '박아현', 국어: 97, 수학: 92, 영어: 88, 과학: 95 });
+students.push({ 이름: '서준서', 국어: 45, 수학: 52, 영어: 72, 과학: 78 });
+for (var i in students) {
+  students[i].getSum = function () {
+    return this.국어 + this.수학 + this.영어 + this.과학;
+  };
+  students[i].getAverage = function () {
+    return this.getSum() / 4;
+  };
+}
+output = '이름\t총점\t평균\n';
+for (var i in students) {
+  with (students[i]) {
+    output += 이름 + '\t' + getSum() + '\t' + getAverage() + '\n';
+  }
+}
+console.log(output)
+
+function makeStudent(name, korean, math, english, science) {
+  var willReturn = {
+      이름: name,
+      국어: korean,
+      수학: math,
+      영어: english,
+      과학: science,
+      getSum: function () {
+        return this.국어 + this.수학 + this.영어 + this.과학;
+      },
+	  getAverage: function () {
+	    return this.getSum() / 4;
+	  },
+	  toString: function () {
+	    return this.이름 + '\t' + this.getSum() + '\t' + this.getAverage(); 
+	  }
+  }
+  return willReturn;
+}
+students = [];
+students.push(makeStudent('하하', 98, 93, 94, 95))
+students.push(makeStudent('호호', 88, 94, 95, 96))
+output = '이름\t총점\t평균\n';
+for (var i in students) {
+  output += students[i].toString() + '\n';
+}
+console.log(output)
+
+function clone(obj) {
+  var output = {};
+  for (var i in obj) {
+    output[i] = obj[i];
+  }
+  return output;
+}
+var original = { a: 10, b: 20 };
+var referenced = original // 얕은 복사 객체
+var cloned = clone(original); //깊은 복사 객체
+// 원본의 값 변경
+original.a = 100;
+console.log(JSON.stringify(referenced, null, 2));
+console.log(JSON.stringify(cloned, null, 2));
+
+const originalArray = [1, 2, 3, 4, 5];
+const newArray = [...originalArray];
+originalArray[0] = 100;
+originalArray[1] = 200;
+console.log(originalArray)
+console.log(newArray)
+
+const originalObject = {
+  name: '하이',
+  birthday: new Date(2000, 12-1, 12).toString()
+}
+const newObject = {...originalObject}
+console.log(newObject)
+</script>
+</body>
+</html>
