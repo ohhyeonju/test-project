@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>180903 생성자 함수</title>
+</head>
+<body>
+<script type="text/javascript"> 
+function Student(name, korean, math, english, science) {
+  this.이름 = name;
+  this.국어 = korean;
+  this.수학 = math;
+  this.영어 = english;
+  this.과학 = science;
+  
+  this.getSum = function() {
+    return this.국어 + this.수학 + this.영어 + this.과학;
+  }
+  
+  this.getAverage = function() {
+    return this.getSum() / 4;
+  }
+  
+  this.toString = function() {
+    return this.이름 + '\t' + this.getSum() + '\t' + this.getAverage();
+  }
+}
+var student = new Student('하하', 96, 93, 92, 94);
+
+var students = [];
+students.push(new Student('호호', 99, 92, 91, 93));
+students.push(new Student('히히', 93, 93, 94, 95));
+var output = '이름\t총점\t평균\n';
+for (var i in students) {
+  output += students[i].toString() + '\n';
+}
+console.log(output);
+
+function Constructor(value) {
+  this.value = value;
+}
+var constructor = new Constructor('Hello');
+console.log(constructor.value)
+
+constructor = Constructor('Hello');
+console.log(value)
+
+function Rectangle(width, height) {
+  this.width = width;
+  this.height = height;
+}
+Rectangle.prototype.getArea = function() {
+  return this.width * this.height;
+}
+var rectangle = new Rectangle(5, 7);
+console.log('AREA: ' + rectangle.getArea());
+
+rectangle.width = -2;
+console.log('AREA: ' + rectangle.getArea());
+
+function Rectangle(w, h) {
+  var width = w;
+  var height = h;
+  
+  this.getWidth = function() {return width;}
+  this.getHeight = function() {return height;}
+  this.setWidth = function(w) {
+    if (w < 0) {
+      throw '길이는 음수일 수 없습니다';
+    } else {
+      width = w;
+    }
+  }
+  this.setHeight = function(h) {
+    if (h < 0) {
+      throw '높이는 음수일 수 없습니다';
+    } else {
+      height = h;
+    }
+  }
+}
+Rectangle.prototype.getArea = function() {
+  return this.getWidth() * this.getHeight();
+}
+rectangle = new Rectangle(5, 7);
+//rectangle.setWidth(-2);
+console.log('AREA: ' + rectangle.getArea());
+
+function Square(length) {
+  this.base = Rectangle;
+  this.base(length, length);
+}
+Square.prototype = Rectangle.prototype;
+Square.prototype.constructor = Square;
+var square = new Square(5);
+console.log(rectangle.getArea() + ' : ' + square.getArea())
+console.log(square instanceof Rectangle)
+
+function Product(name, weight, price) {
+  this.name = name;
+  this.weight = weight;
+  this.price = price;
+}
+Product.prototype.calculate = function(weight) {
+  return this.price * (weight / this.weight);
+}
+var product = new Product('호호', 100, 2200);
+console.log(product.calculate(500));
+</script>
+</body>
+</html>
