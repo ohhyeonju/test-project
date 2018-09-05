@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>180904 기본 내장 객체</title>
+</head>
+<body>
+<script type="text/javascript"> 
+var primitiveNumber = 273;
+var objectNumber = new Number(273);
+var output = '';
+output += typeof (primitiveNumber) + ' : ' + primitiveNumber + '\n';
+output += typeof (objectNumber) + ' : ' + objectNumber;
+console.log(output)
+
+primitiveNumber.method = function () {
+  return 'Primitive Method'
+};
+//output = primitiveNumber.method() + '\n'; 오류
+
+Number.prototype.method = function () {
+  return 'Method on Prototype'
+}
+output = primitiveNumber.method() + '\n';
+output += objectNumber.method();
+console.log(output);
+
+var object = { property: 273 };
+output = "HOP('property'): " + object.hasOwnProperty('property') + '\n';
+output += "HOP('constructor'): " + object.hasOwnProperty('constructor') + '\n';
+output += "PIE('property'): " + object.propertyIsEnumerable('property') + '\n';
+output += "PIE('constructor'): " + object.propertyIsEnumerable('constructor');
+console.log(output)
+for (var key in object) {
+  console.log(object[key])
+}
+
+object = new Object();
+console.log(object);
+console.log(object.toString())
+
+var student = {
+  name: '호호',
+  grade: '1학년',
+  toString: function () {
+    return this.name + ' : ' + this.grade;
+  }
+}
+console.log(student)
+alert(student)
+
+var numberFromLiteral = 273;
+var numberFromObject = new Number(273);
+output = '1. ' + typeof (numberFromLiteral) + '\n';
+output += '2. ' + typeof (numberFromObject);
+console.log(output)
+
+if (typeof (numberFromLiteral) == 'number') {
+  console.log('numberFromLiteral은 숫자');
+}
+if (typeof (numberFromObject) == 'number') {
+  console.log('numberFromObject는 숫자');
+}
+
+if (numberFromLiteral.constructor == Number) {
+  console.log('numberFromLiteral은 숫자');
+}
+if (numberFromObject.constructor == Number) {
+  console.log('numberFromObject는 숫자');
+}
+
+Object.prototype.test = function () {
+  console.log(this);
+}
+var number = 273;
+number.test();
+
+var numberFromConstructor = new Number(273);
+console.log(typeof (numberFromConstructor))
+
+number = 273.5210332;
+output = number.toFixed(1) + '\n';
+output += number.toFixed(4);
+console.log(output)
+
+var fixedNumber = (273.5210332).toFixed(2);
+console.log(fixedNumber)
+
+function Constructor() {}
+Constructor.property = 273;
+Constructor.method = function () {};
+console.log(Constructor.property)
+
+number = Number.MAX_VALUE + 1;
+console.log(number)
+
+var addNumber = Number('0.0000000000000001e+308');
+number = Number.MAX_VALUE + addNumber;
+console.log(number)
+
+var stringFromLiteral = 'Hello World..!';
+var stringFromConstructor = new String('Hello World..!');
+output = typeof(stringFromLiteral) + '\n';
+output += typeof (stringFromConstructor);
+console.log(output)
+
+var characters = prompt('사용할 비밀번호를 입력해주세요.', '6글자 이상');
+if (characters.length < 6) {
+  console.log('6글자 이상 입력하세요')
+} else {
+  console.log('잘했어요')
+}
+
+var string = 'abcdefg';
+string.toUpperCase();
+console.log(string)
+
+string = string.toUpperCase();
+console.log(string)
+
+output = 'anchor: ' + string.anchor() + '<br/>';
+output += 'big: ' + string.big() + '<br/>';
+output += 'blink: ' + string.blink() + '<br/>';
+output += 'bold: ' + string.bold() + '<br/>';
+output += 'fixed: ' + string.fixed() + '<br/>';
+output += 'string: ' + string.fontcolor('red') + '<br/>';
+output += 'fontsize: ' + string.fontsize(15) + '<br/>';
+output += 'italics: ' + string.italics() + '<br/>';
+output += 'link: ' + string.link('http://hanbit.co.kr') + '<br/>';
+output += 'small' + string.small() + '<br/>';
+output += 'strike: ' + string.strike() + '<br/>';
+output += 'sub: ' + string.sub() + '<br/>';
+output += 'sup: ' + string.sup() + '<br/>';
+document.write(output)
+
+output = 'Hello world..!';
+output = output.toLowerCase();
+output = output.substring(0, 10);
+output = output.anchor('name');
+console.log(output)
+
+output = 'Hello world..!';
+output = output.toLowerCase().substring(0, 10).anchor('name');
+console.log(output)
+
+var array1 = [2, 3, 5, 4, 6];
+var array2 = new Array();
+var array3 = new Array(10);
+var array4 = new Array(2, 3, 5, 4, 6);
+
+var array = ['A', 'B', 'C', 'D']
+output = '';
+for (var i = 0; i < array.length; i++) {
+  output += i + ' : ' + array[i] + '\n';
+}
+console.log(output)
+
+array = [52, 273, 103, 32]
+array.sort();
+console.log(array)
+
+array.sort(function (left, right) {
+  return left - right;
+});
+console.log(array)
+
+function Student(name, korean, math, english, science) {
+  this.이름 = name;
+  this.국어 = korean;
+  this.수학 = math;
+  this.영어 = english;
+  this.과학 = science;
+  
+  this.getSum = function () {
+    return this.국어 + this.수학 + this.영어 + this.과학;
+  }
+  
+  this.getAverage = function () {
+    return this.getSum() / 4;
+  }
+  
+  this.toString = function () {
+    return this.이름 + '\t' + this.getSum() + '\t' + this.getAverage();
+  }
+}
+var students = [];
+students.push(new Student('호호', 99, 93, 94, 95));
+students.push(new Student('하하', 90, 96, 98, 99));
+students.push(new Student('히히', 99, 91, 97, 98));
+students.push(new Student('윤아린', 95, 98, 98, 98));
+students.push(new Student('윤명월', 64, 88, 92, 92));
+students.push(new Student('김미화', 82, 86, 98, 88));
+students.push(new Student('김연화', 88, 74, 78, 92));
+students.push(new Student('박아현', 97, 92, 88, 95));
+students.push(new Student('서준서', 45, 52, 72, 78));
+students.sort(function (left, right) {
+  return right.getSum() - left.getSum();
+})
+students = students.slice(0, 3);
+output = '이름\t총점\t평균\n';
+for (var i in students) {
+  output += students[i].toString() + '\n';
+}
+console.log(output)
+
+Array.prototype.remove = function (index) {
+  this.splice(index, 1);
+}
+array = [52, 273, 32, 274, 129]
+for (var i = 0; i < array.length; i++) {
+  if (array[i] > 100) {
+    array.remove(i);
+  }
+}
+console.log(array)
+
+for (var i = array.length - 1; i >= 0; i--) {
+  if (array[i] > 100) {
+    array.remove(i);
+  }
+}
+console.log(array)
+</script>
+</body>
+</html>

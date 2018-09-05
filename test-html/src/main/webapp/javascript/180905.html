@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>180905 기본 내장 객체</title>
+</head>
+<body>
+<script type="text/javascript"> 
+var date = new Date();
+console.log(date)
+
+date = new Date('December 9, 1991');
+console.log(date)
+
+date = new Date(1991, 11, 9);
+date = new Date(1991, 11, 9, 2, 24, 23, 1);
+console.log(date)
+
+date = new Date(2732741033257);
+console.log(date)
+
+date = new Date();
+date.setDate(date.getDate() + 7);
+console.log(date);
+
+date = new Date(1991, 11, 9);
+var output = '';
+output += '★toDateString: ' + date.toDateString() + '\n';
+output += '★toGMTString: ' + date.toGMTString() + '\n';
+output += '★toLocaleDateString: ' + date.toLocaleDateString() + '\n';
+output += '★toLocaleString: ' + date.toLocaleString() + '\n';
+output += '★toLocaleTimeString: ' + date.toLocaleTimeString() + '\n';
+output += '★toString: ' + date.toString() + '\n';
+output += '★toTimeString: ' + date.toTimeString() + '\n';
+output += '★toUTCString: ' + date.toUTCString() + '\n';
+console.log(output)
+
+var now = new Date();
+var before = new Date('December 9, 1991');
+var interval = now.getTime() - before.getTime();
+interval = Math.floor(interval / (1000 * 60 * 60 * 24));
+console.log('Interval: ' + interval + '일');
+
+Date.prototype.getInterval = function (otherDate) {
+  var interval;
+  // 양수로 날짜 간격을 구하려고 조건문을 사용
+  if (this > otherDate) {
+    interval = this.getTime() - otherDate.getTime();
+  } else {
+    interval = otherDate.getTime() - this.getTime();
+  }
+  return Math.floor(interval / (1000 * 60 * 60 * 24));
+};
+console.log('Interval: ' + now.getInterval(before) + '일');
+
+console.log(Math.E);
+console.log(Math.LN2);
+console.log(Math.LN10);
+console.log(Math.LOG2E);
+console.log(Math.LOG10E);
+console.log(Math.PI);
+console.log(Math.SQRT1_2);
+console.log(Math.SQRT2);
+
+var max = Math.max;
+console.log(max(52, 273, 103, 57, 32));
+
+console.log(Array.isArray([1, 2, 3]));
+console.log(Array.isArray({}));
+console.log(Array.isArray(1));
+
+var array = [1, 2, 3, 4, 5, 5, 4, 3, 2, 1];
+var output1 = array.indexOf(4);
+var output2 = array.indexOf(8);
+var output3 = array.lastIndexOf(4);
+var output4 = array.lastIndexOf(8);
+output = output1 + ' : ' + output2 + '\n';
+output += output3 + ' : ' + output4;
+console.log(output);
+
+array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+var sum = 0;
+output = '';
+array.forEach(function (element, index, array) {
+  sum += element;
+  output += index + ': ' + element + ' → ' + sum + '\n';
+})
+console.log(output);
+
+output = array.map(function (element) {
+  return element * element;
+})
+console.log(output);
+
+array = array.filter(function (element, index, array) {
+  return element <= 5;
+});
+console.log(array);
+
+function lessThanFive(element, index, array) {
+  return element < 5;
+}
+function lessThanTwenty(element, index, array) {
+  return element < 20;
+}
+output1 = array.every(lessThanFive);
+output2 = array.every(lessThanTwenty);
+output3 = array.some(lessThanFive);
+output4 = array.some(lessThanTwenty);
+output = output1 + ' : ' + output2 + '\n';
+output += output3 + ' : ' + output4;
+console.log(output);
+
+array = [1, 2, 3, 4, 5];
+output = '';
+array.reduce(function (previousValue, currentValue, index, array) {
+  output += previousValue + ' : ' + currentValue + ' : ' + index + '\n';
+});
+console.log(output);
+
+var result = array.reduce(function (previousValue, currentValue) {
+  return previousValue + currentValue;
+});
+console.log(result);
+
+var text = '  text  ';
+output = '++' + text + '++\n';
+output += '++' + text.trim() + '++';
+console.log(output);
+
+var object = {
+    name: '하하',
+    region: '서울'
+};
+console.log(JSON.stringify(object));
+
+var copy = JSON.parse(JSON.stringify(object));
+console.log(copy.name + ' : ' + copy.region);
+
+object = {
+    name: 'object',
+    prop: 'object',
+    toJSON: function () {
+      return {
+        custom: 'custom'
+      };
+    }
+};
+console.log(JSON.stringify(object));
+
+var students = [];
+students.push({ 이름: '윤인성', 국어: 87, 수학: 98, 영어: 88, 과학: 95 });
+students.push({ 이름: '연하진', 국어: 92, 수학: 38, 영어: 96, 과학: 98 });
+students.push({ 이름: '구지연', 국어: 76, 수학: 96, 영어: 94, 과학: 90 });
+students.push({ 이름: '나선주', 국어: 98, 수학: 92, 영어: 96, 과학: 92 });
+students.push({ 이름: '윤아린', 국어: 95, 수학: 98, 영어: 98, 과학: 98 });
+var filteredA = students.filter(function (item) {
+  return item.과학 > 90;
+});
+console.log(filteredA);
+var filteredB = students.filter(function (item) {
+  return ((item.국어 + item.수학 + item.영어 + item.과학) / 4) > 90;
+});
+console.log(filteredB)
+
+filteredA = students.filter((item) => item.과학 > 90);
+console.log(filteredA);
+filteredB = students.filter((i) => ((i.국어 + i.수학 + i.영어 + i.과학) / 4) > 90);
+console.log(filteredB);
+</script>
+</body>
+</html>
