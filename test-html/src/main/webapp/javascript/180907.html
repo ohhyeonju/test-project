@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>180907 정규 표현식</title>
+</head>
+<body>
+<script type="text/javascript"> 
+var regExp1 = new RegExp('text');
+var regExp2 = /text/;
+
+var regExp = /script/;
+var string = 'Javascript jQuery Ajax';
+console.log(regExp.test(string));
+
+console.log(string.split(regExp));
+
+regExp = /a/;
+console.log(string.replace(regExp, '+$&+'));
+
+console.log(string.replace(regExp, function (value) {
+  return '+' + value + '+';
+}));
+
+regExp = /(a)(v)(a)/;
+console.log(string.replace(regExp, '+$1=$2=$3+'));
+
+regExp = /Expression/im
+regExp = new RegExp('Expression', 'im');
+
+regExp = /a/ig;
+console.log(string.replace(regExp, '+$&+'));
+
+regExp = /^j/ig;
+string = 'Javascript\njQuery\nAjax';
+console.log(string.replace(regExp, '+$&+'));
+
+regExp = /^j/igm;
+console.log(string.replace(regExp, '+$&+'));
+
+regExp = /[aj]/ig;
+string = 'Javascript jQuery Ajax';
+console.log(string.replace(regExp, '+$&+'));
+
+regExp = /......-......./;
+string = '910101-2001211';
+console.log(string.replace(regExp, '+$&+'));
+
+regExp = /\d\d\d\d\d\d-[1234]\d\d\d\d\d\d/;
+console.log(string.replace(regExp, '+$&+'));
+
+regExp = /\d{6}-[1234]\d{6}/;
+console.log(string.replace(regExp, '+$&+'));
+
+regExp = /(na)+/;
+string = 'banana';
+console.log(string.replace(regExp, '+$&+'));
+
+string = prompt('소문자 또는 숫자로만 구성된 단어를 입력하세요.', '단어');
+regExp = /([0-9]|[a-z])/g;
+if (string.replace(regExp, '').length == 0) {
+  console.log('감사합니다.');
+} else {
+  console.log('ㅇㅁㅇ');
+}
+
+function isKoreanName(string) {
+  var regExp = /([가-힣])/g;
+  var replacedString = string.replace(regExp, '');
+  if (replacedString.length == 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
+console.log(isKoreanName('호호'));
+
+function isEmail(string) {
+  var regExp = /\w+@\w+\.\w+/;
+  return regExp.test(string);
+}
+console.log(isEmail('gghhll@naver.com'));
+
+function addComma(number) {
+  var regExp = /(^[+-]?\d+)(\d{3})/;
+  var string = String(number);
+  while (regExp.test(string)) {
+    string = string.replace(regExp, '$1,$2');
+  }
+  return string;
+}
+console.log(addComma('100000000'));
+
+</script>
+</body>
+</html>
