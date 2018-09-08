@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>180908-1 브라우저 객체 모델</title>
+</head>
+<body>
+<script type="text/javascript"> 
+var output = '';
+for (var key in window) {
+  output += '●' + key + ': ' + window[key] + '\n';
+}
+console.log(output);
+
+//window.open();
+
+//window.open('http://www.daum.net', 'child', 'width=600, height=300', true);
+
+var child = window.open('', '', 'width=300, height=200');
+if (child) {
+  child.document.write('<h1>From Parent Window</h1>');
+} else {
+  console.log('팝업 차단을 해제해주세요.');
+}
+
+child.moveTo(0, 0);
+/* 
+setInterval(function () {
+  child.moveBy(10, 10);
+}, 1000);
+*/
+
+output = '';
+for (var key in screen) {
+  output += '●' + key + ': ' + screen[key] + '\n';
+}
+console.log(output);
+
+var width = screen.width;
+var height = screen.height;
+child.resizeTo(width, height);
+/* 
+setInterval(function () {
+  child.resizeBy(-20, -20);
+  child.moveBy(10, 10);
+}, 1000); 
+*/
+
+output = '';
+for (var key in location) {
+  output += '●' + key + ': ' + location[key] + '\n';
+}
+console.log(output);
+
+/* location = 'http://www.daum.net';
+location.href = 'http://www.daum.net';
+location.assign('http://www.daum.net');
+location.replace('http://www.daum.net'); */
+
+/* location = location;
+location.href = loacation.href;
+location.assign(location);
+location.replace(location);
+loacation.reload(); */
+
+output = '';
+for (var key in navigator) {
+  output += '●' + key + ': ' + navigator[key] + '\n';
+}
+console.log(output);
+</script>
+</body>
+</html>

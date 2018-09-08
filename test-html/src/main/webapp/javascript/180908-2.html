@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>180908-2 브라우저 객체 모델</title>
+</head>
+<body>
+<script type="text/javascript"> 
+window.onload = function () {
+  alert('Process - 0');
+};
+
+var audio = new Audio('Kalimba.mp3');
+audio = new Audio();
+audio.src = 'Kalimba.mp3';
+
+var userAgent = navigator.userAgent;
+console.log(userAgent);
+
+var smartPhones = ['iphone', 'ipod', 'android'];
+for (var i in smartPhones) {
+  if (navigator.userAgent.toLowerCase().match(new RegExp(smartPhones[i]))) {
+    console.log('스마트폰 페이지로 이동합니다.');
+    location = 'http://m.hanbit.co.kr';
+  }
+}
+
+if (window.orientation == 0 || window.orientation == 100) {
+  console.log('세로 방향입니다.');
+} else if (window.orientation == 90 || window.orientation == -90) {
+  console.log('가로 방향입니다.');
+}
+
+var child = window.open(
+    'https://www.facebook.com/share.php?u=' + encodeURIComponent('<원하는 주소>'),
+    'child',
+    'width=600,height=400',
+    false);
+if (!child) {
+  console.log('팝업 차단을 해제해주세요.');
+}
+</script>
+
+<h1>Process - 1</h1>
+<h1>Process - 2</h1>
+<button onclick="audio.play()">PLAY</button>
+<button onclick="audio.pause()">PAUSE</button>
+<input type="number" onchange="audio.currentTime=this.value"/>
+<input type="number" onchange="audio.volume=this.value"/>
+</body>
+</html>
