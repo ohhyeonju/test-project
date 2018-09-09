@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>180909-1 문서 객체 모델</title>
+<script type="text/javascript"> 
+window.onload = function () {
+  var header = document.getElementById('header');
+  
+  header = document.createElement('h1');
+  var textNode = document.createTextNode('Hello DOM');
+  header.appendChild(textNode);
+  document.body.appendChild(header);
+  
+  var img = document.createElement('img');
+  img.src = 'sky.jpg'
+  img.width = 500;
+  img.height = 350;
+  document.body.appendChild(img);
+  
+  var img1 = document.createElement('img');
+  img1.setAttribute('src', 'sky.jpg');
+  img1.setAttribute('width', 500);
+  img1.setAttribute('height', 350);
+  img1.setAttribute('data-property', 350);
+  document.body.appendChild(img1);
+  
+  var output = '';
+  output += '<ul>';
+  output += '  <li>JavaScript</li>';
+  output += '  <li>jQuery</li>';
+  output += '  <li>Ajax</li>';
+  output += '</ul>';
+  document.body.innerHTML = output;
+  document.body.innerHTML += '<h1>Document Object Model</h1>';
+  
+  document.body.textContent = output;
+  document.body.textContent += '<h1>Document Object Model</h1>';
+};
+
+</script>
+</head>
+<body>
+</body>
+</html>

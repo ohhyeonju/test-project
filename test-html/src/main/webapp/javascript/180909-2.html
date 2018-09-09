@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>180909-2 문서 객체 모델</title>
+<script type="text/javascript"> 
+window.onload = function () {
+  var header1 = document.getElementById('header-1');
+  var header2 = document.getElementById('header-2');
+  header1.innerHTML = 'with getElementById()';
+  header2.innerHTML = 'with getElementById()';
+  
+  var headers = document.getElementsByTagName('h1');
+  headers[0].innerHTML = 'with getElementByTagName()';
+  
+  var output = '';
+  for (var i in headers) {
+    output += i + '\n';
+  }
+  console.log(output);
+  
+  header1 = document.querySelector('#header-1');
+  header1.innerHTML = 'with getElementById()';
+  
+  header2.style.border = '2px solid black';
+  header2.style.color = 'orange';
+  header2.style.backgroundColor = 'red';
+  
+  var willRemove = document.getElementById('will-remove');
+  //document.body.removeChild(willRemove);
+  willRemove.parentNode.removeChild(willRemove);
+  
+  var clock = document.getElementById('clock');
+  setInterval(function () {
+    clock.innerHTML = new Date().toString();
+  }, 1000);
+};
+
+</script>
+</head>
+<body>
+<h1 id="header-1">Header</h1>
+<h1 id="header-2">Header</h1>
+<h1 id="will-remove">Header</h1>
+<h1 id="clock"></h1>
+</body>
+</html>
