@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>180910-4 이벤트</title>
+<script type="text/javascript"> 
+window.onload = function () {
+  var header = document.getElementById('my-header');
+  
+  header.addEventListener('click', function () {
+    this.innerHTML += '+';
+  })
+  
+  var handler = function () {
+    this.style.color = 'red';
+    this.removeEventListener('click', handler);
+  };
+  header.addEventListener('click', handler);
+}
+</script>
+</head>
+<body>
+<h1 id="my-header">Click</h1>
+</body>
+</html>

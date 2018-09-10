@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>180910-3 이벤트</title>
+<style>
+* {border: 3px solid black;}
+</style>
+<script type="text/javascript"> 
+window.onload = function () {
+  document.getElementById('header').onclick = function () {
+    console.log('header');
+  };
+  document.getElementById('paragraph').onclick = function (e) {
+    var event = e || window.event;
+    console.log('paragraph');
+    event.cancelBubble = true;
+    if (event.stopPropagation) {
+      event.stopPropagation();
+    }
+  };
+};
+</script>
+</head>
+<body>
+<div onclick="console.log('outer-div')">
+  <div onclick="console.log('inner-div')">
+    <h1 onclick="console.log('header')">
+      <p onclick="console.log('paragraph')">Paragraph</p>
+    </h1>
+  </div>
+</div>
+
+<h1 id="header">
+  <p id="paragraph">Paragraph</p>
+</h1>
+</body>
+</html>
