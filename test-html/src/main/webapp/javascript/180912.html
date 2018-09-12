@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>180912 예외 처리</title>
+<script type="text/javascript"> 
+function registerEventListener(node, event, listener) {
+  if (node.addEventListener) {
+    // 파이어폭스, 크롬, 사파리, 오페라
+    node.addEventListener(envet, listener, false);
+  } else if (node.attachEvent) {
+    // 인터넷 익스플로러
+    node.attachEvent('on' + event, listener);
+  }
+}
+</script>
+</head>
+<body>
+</body>
+</html>
