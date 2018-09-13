@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>180913 예외 처리</title>
+<script type="text/javascript"> 
+try {
+  willExcept.byeBye();
+  alert('try 구문 종료');
+} catch (exception) {
+  console.log('예외가 발생했습니다.');
+} finally {
+  console.log('예외 발생 가능 부분을 통과했습니다');
+}
+
+function registerEventListener(node, event, listener) {
+  try {
+      // 최신 버전의 웹 브라우저
+      node.addEventListener(event, listener, false);
+	} catch (exception) {
+	  // 구버전의 인터넷 익스플로러
+	  node.attachEvent('on' + event, listener);
+	}
+}
+window.onload = function () {
+  var header = document.getElementById('header');
+  registerEventListener(header, 'click', function () {
+    console.log("click");
+  });
+};
+
+try {
+  var array = new Array(9999999999999999);
+} catch (exception) {
+  var output = '';
+  for (var i in exception) {
+    output += i + ': ' + exception[i] + '\n';
+  }
+  console.log(output);
+}
+
+try {
+  //error+-error+++;
+} catch (exception) {
+  console.log('Exception');
+}
+
+try {
+  throw 'DivideByZeroException';
+} catch (exception) {
+  if (exception == 'DivideByZeroException') {
+    console.log('에러');
+  }
+}
+
+function divide(alpha, beta) {
+  if (beta == 0) {
+    throw 'DivideByZeroException';
+  } else {
+    return alpha / beta;
+  }
+}
+try {
+  divide(10, 0);
+} catch (exception) {
+  console.log('catch');
+}
+</script>
+</head>
+<body>
+<h1 id="header">Click</h1>
+</body>
+</html>
