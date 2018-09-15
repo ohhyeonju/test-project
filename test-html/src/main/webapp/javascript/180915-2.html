@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>180915-2 jQuery 기본</title>
+<style>
+.high-light {
+  background: yellow;
+}
+.high-light-0 { background: yellow; }
+.high-light-1 { background: orange; }
+.high-light-2 { background: blue; }
+.high-light-3 { background: green; }
+.high-light-4 { background: red; }
+</style>
+<script src="jquery-3.1.1.js"></script>
+<script type="text/javascript"> 
+$(document).ready(function () {
+  $('h1').addClass('high-light');
+  $('h1').each(function (index, item) {
+    //$(item).addClass('high-light-' + index);
+    $(this).addClass('high-light-' + index);
+  });
+  
+  /* $('h1').addClass(function (index) {
+    return 'high-light-' + index;
+  }) */
+});
+
+$(function () {
+  var object1 = {};
+  object1.name = 'jj';
+  object1.gender = 'Male';
+  object1.part = 'Second Guitar'
+});
+
+$(document).ready(function () {
+  var object = {name: 'gg'};
+  $.extend(object, {
+    region: '서울',
+    part: '기타'
+  });
+  var output = '';
+  $.each(object, function (key, item) {
+    output += key + ': ' + item + '\n';
+  });
+  console.log(output);
+});
+
+function test(options) {
+  options.valueA = options.valueA || 10;
+  options.valueB = options.valueB || 20;
+  options.valueC = options.valueC || 30;
+  console.log(options.valueA + ':' + options.valueB + ':' + options.valueC);
+}
+test({
+  valueA: 32,
+  valueC: 555
+})
+
+object = $.extend({a: 10}, {a:20, b: 20}, {c: 40});
+console.log(JSON.stringify(object));
+
+function test1(options) {
+  options = $.extend({
+    valueA: 10,
+    valueB: 20,
+    valueC: 30
+  }, options);
+  console.log(options.valueA + ':' + options.valueB + ':' + options.valueC);
+}
+test1({
+  valueA: 32,
+  valueC: 555
+})
+</script>
+</head>
+<body>
+<h1>item - 0</h1>
+<h1>item - 1</h1>
+<h1>item - 2</h1>
+<h1>item - 3</h1>
+<h1>item - 4</h1>
+</body>
+</html>
