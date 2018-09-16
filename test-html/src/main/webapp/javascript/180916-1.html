@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>180916-1 jQuery 문서 객체 선택과 탐색</title>
+<script src="jquery-3.1.1.js"></script>
+<script type="text/javascript"> 
+$(document).ready(function () {
+  $('h3:even').css({backgroundColor: 'black', color: 'white'});
+  
+  $('h3').filter(':even').css({backgroundColor: 'black', color: 'white'});
+});
+
+$(function () {
+  $('h3').filter(function (index) {
+    return index % 3 == 0;
+  }).css({backgroundColor: 'gray', color: 'white'});
+});
+
+$(document).ready(function () {
+  $('h1').css('background', 'orange').filter(':even').css('color', 'red');
+});
+
+$(function () {
+  /* $('h1').css('background', 'orange');
+  $('h1:even').css('color', 'white');
+  $('h1:odd').css('color', 'red'); */
+  
+  $('h1').css('background', 'orange').filter(':even').css('color', 'white').end().
+  filter(':odd').css('color', 'red');
+});
+
+$(document).ready(function () {
+  $('div>h1').eq(0).css('background', 'blue');
+  $('div>h1').eq(-1).css('background', 'green');
+});
+
+$(function () {
+  $('h4').css('background', 'yellow').add('h5').css('float', 'left');
+});
+
+$(document).ready(function () {
+  $('h1').each(function () {
+    if ($(this).is('.select')) {
+      $(this).css('background', 'skyblue');
+    }
+  });
+});
+</script>
+</head>
+<body>
+<h3>Header-0</h3>
+<h3>Header-1</h3>
+<h3>Header-2</h3>
+<h3>Header-3</h3>
+<h3>Header-4</h3>
+<h3>Header-5</h3>
+
+<h1>Header-0</h1>
+<h1>Header-1</h1>
+<h1>Header-2</h1>
+
+<div>
+  <h1>Header-0</h1>
+  <h1>Header-1</h1>
+  <h1>Header-2</h1>
+</div>
+
+<h4>Header-0</h4>
+<h5>Header-1</h5>
+<h4>Header-2</h4>
+<h5>Header-3</h5><br>
+
+<h1 class="select">Header-0</h1>
+<h1>Header-1</h1>
+<h1 class="select">Header-2</h1>
+</body>
+</html>

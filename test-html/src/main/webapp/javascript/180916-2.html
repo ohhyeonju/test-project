@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>180916-2 jQuery 문서 객체 선택과 탐색</title>
+<script src="jquery-3.1.1.js"></script>
+<script type="text/javascript"> 
+var xml = '';
+xml += '<friends>';
+xml += '  <friend>';
+xml += '    <name>연하진</name>';
+xml += '    <language>Ruby</language>';
+xml += '  </friend>';
+xml += '  <friend>';
+xml += '    <name>윤명월</name>';
+xml += '    <language>Basic</language>';
+xml += '  </friend>';
+xml += '  <friend>';
+xml += '    <name>윤하린</name>';
+xml += '    <language>C#</language>';
+xml += '  </friend>';
+xml += '</friends>';
+$(document).ready(function () {
+  var xmlDoc = $.parseXML(xml);
+  $(xmlDoc).find('friend').each(function (index) {
+    var output = '';
+    output += '<div>';
+    output += '  <h1>' + $(this).find('name').text() + '</h1>';
+    output += '  <p>' + $(this).find('language').text() + '</p>';
+    output += '</div>';
+    document.body.innerHTML += output;
+  })
+});
+
+$(function () {
+  $('span').parent().css('background', 'red');
+
+  $('button').click(function () {
+    $(this).text('비활성화하기');
+    $(this).parent().css('background', 'yellow');
+    $(this).parent().find('span').text('활성화');
+  })
+});
+
+$(document).ready(function () {
+  $('h1').filter(function (index) {
+    return index % 3 == 1;
+  }).css('background', 'green');
+  $('div').filter(function () {
+    return $(this).find('h1').length > 0; 
+  }).css('background', 'purple');
+})
+</script>
+</head>
+<body>
+<div>
+  <span>비활성화</span>
+  <button>활성화하기</button>
+</div>
+<div>
+  <span>비활성화</span>
+  <button>활성화하기</button>
+</div>
+
+<div>
+  <h1>Header-0</h1>
+  <h1>Header-1</h1>
+  <h1>Header-2</h1>
+</div>
+</body>
+</html>
