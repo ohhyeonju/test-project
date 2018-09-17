@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>180917-2 jQuery 문서 객체 조작</title>
+<script src="jquery-3.1.1.js"></script>
+<script type="text/javascript"> 
+$(() => {
+  $('<h1></h1>').html('Hello World..!').appendTo('body');
+  
+  $('<h1>Hello World..!</h1>').appendTo('body');
+  
+  $('<img/>').attr('src', 'Chrysanthemum.jpg').appendTo('body');
+  
+  $('<img/>', {
+    src: 'Chrysanthemum.jpg',
+    width: 350,
+    height: 250,
+  }).appendTo('body');
+  
+  var h1 = '<h1>Header1</h1>';
+  var h2 = '<h2>Header2</h2>';
+  $('body').append(h1, h2, h1, h2);
+  
+  var content = [
+    {name:'ggg', region: 'seoul'},
+    {name:'sss', region: 'busan'},
+    {name:'aaa', region: 'daegu'},
+  ];
+  $('div').append(function (index) {
+    var item = content[index];
+    var output = '';
+    output += '<h1>' + item.name + '</h1>';
+    output += '<h2>' + item.region + '</h2>';
+    return output;
+  });
+});
+
+$(function () {
+  $('img').css('width', 250);
+  
+  setInterval(function () {
+    $('img').first().appendTo('body');
+  }, 2000);
+});
+
+$(function () {
+  $('p').append($('h4'));
+  
+  $('p').append($('h3').clone());
+});
+</script>
+</head>
+<body>
+<div></div>
+<div></div>
+<div></div>
+<hr>
+<p></p>
+<hr>
+<h4>h4</h4>
+<h3>h3</h3>
+</body>
+</html>

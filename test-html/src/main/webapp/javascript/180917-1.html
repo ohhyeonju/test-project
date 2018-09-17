@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>180917-1 jQuery 문서 객체 조작</title>
+<style>
+.first {color: red;}
+.second {color: pink;}
+.third {color: orange;}
+</style>
+<script src="jquery-3.1.1.js"></script>
+<script type="text/javascript"> 
+$(document).ready(function () {
+  $('h1').addClass(function (index) {
+    return 'class' + index;
+  });
+});
+
+$(function () {
+  $('h1').removeClass('select');
+  $('h1').toggleClass('gg');
+});
+
+$(() => {
+  var src = $('img').attr('src');
+  console.log(src);
+  
+  $('img').attr('width', 200);
+});
+
+$(document).ready(function () {
+  $('img').attr('width', function (index) {
+    return (index + 1) * 100;
+  });
+});
+
+$(function () {
+  $('img').attr({
+    width: function (index) {
+      return (index + 1) * 100;
+    },
+    height: 100
+  });
+});
+
+$(() => {
+  $('h1').removeAttr('data-index');
+});
+
+$(document).ready(function () {
+  var color = $('h1').css('color');
+  console.log(color);
+});
+
+$(document).ready(() => {
+  $('h1').css('color', 'red');
+  
+  var color = ['red', 'white', 'purple'];
+  $('h1').css('color', function (index) {
+    return color[index];
+  });
+  
+  $('h1').css({
+    color: function (index) {
+      return color[index];
+    },
+    backgroundColor: 'black'
+  });
+});
+
+$(document).ready(function () {
+  var html = $('h1').html();
+  console.log(html);
+  
+  var text = $('h1').text();
+  console.log(text);
+});
+
+$(function () {
+  $('div').html('<h1>$().html() Method</h1>');
+  
+  $('div:last').text('<h1>$().html() Method</h1>');
+});
+
+$(document).ready(function () {
+  $('div').html(function (index) {
+    return '<h1>Header-' + index + '</h1>';
+  });
+  
+  $('h1').html(function (index, html) {
+    return '★' + html + '★';
+  });
+}); 
+
+$(function () {
+  $('div>h1').first().remove();
+  
+  $('div').empty();
+})
+</script>
+</head>
+<body>
+  <h1 class="item gg">Header-0</h1>
+  <h1 class="item select">Header-1</h1>
+  <h1 class="item">Header-2</h1>
+  
+  <img src="Chrysanthemum.jpg"/>
+  <img src="Desert.jpg"/>
+  <img src="Hydrangeas.jpg"/>
+  
+  <h1 data-index="0">Header-0</h1>
+  <h1 data-index="1">Header-1</h1>
+  <h1 data-index="2">Header-2</h1>
+  
+  <h1 class="first">Header-0</h1>
+  <h1 class="second">Header-0</h1>
+  <h1 class="third">Header-0</h1>
+  
+  <div></div>
+  <div></div>
+  <div></div>
+</body>
+</html>
