@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>180918-1 jQuery 이벤트</title>
+<style>
+.reverse {
+  background: black;
+  color: white;
+}
+.reverse1 {
+  background: gray;
+  color: white;
+}
+/* { margin: 0px; padding: 0px; } */
+div {
+  margin: 5px; padding: 3px;
+  border: 3px solid black;
+  border-radius: 10px;
+}
+#canvas {
+  border: 3px solid black;
+}
+* { 
+  margin: 5px; margin: 5px; 
+  border: 3px solid black;
+}
+</style>
+<script src="jquery-3.1.1.js"></script>
+<script type="text/javascript"> 
+$(document).ready(function () {
+  $('h1').on('click', function () {
+    $(this).html(function (index, html) {
+      return html + '+';
+    });
+  });
+  
+  $('h1').on({
+    mouseenter: function () { $(this).addClass('reverse'); },
+    mouseleave: function () { $(this).removeClass('reverse'); }
+  });
+  
+  $('h1').hover(function() {
+    $(this).addClass('reverse1');
+  }, function () {
+    $(this).removeClass('reverse1');
+  });
+  
+  $('h1').click(function() {
+    $(this).html('CLICK');
+    console.log('이벤트가 발생했습니다.');
+    
+    $(this).off();
+  });
+  
+  $('div').click(function () {
+    var header = $('h2', this).text();
+    var paragraph = $('p', this).text();
+    console.log(header + '\n' + paragraph);
+    
+    header = $(this).find('h2').text();
+    paragraph = $(this).find('p').text();
+    console.log(header + '\n' + paragraph);
+  });
+  
+  var canvas = document.getElementById('canvas');
+  var context = canvas.getContext('2d');
+  $(canvas).on({
+    mousedown: function (event) {
+      var position = $(this).offset();
+      var x = event.pageX - position.left;
+      var y = event.pageY - position.top;
+      
+      // 선을 그립니다.
+      context.beginPath();
+      context.moveTo(x, y);
+    },
+    mouseup: function (event) {
+      var position = $(this).offset();
+      var x = event.pageX - position.left;
+      var y = event.pageY - position.top;
+      
+      context.lineTo(x, y);
+      context.stroke();
+    }
+  })
+  
+  $('h3').click(function () {
+    $(this).html(function (index, html) {
+      return html + '★';
+    });
+  });
+  setInterval(function () {
+    //$('h3').last().trigger('click');
+    //$('h3').last().click();
+  }, 1000);
+  
+  $('h3').click(function (event, data1, data2) {
+    console.log(data1 + ' : ' + data2);
+  });
+  $('h3').eq(1).trigger('click', [273, 52]);
+  
+  $('a').click(function (event) {
+    $(this).css('background-color', 'blue');
+    /* event.stopPropagation();
+    event.preventDefault(); */
+    
+    return false;
+  });
+  $('h4').click(function (event) {
+    $(this).css('backgroundColor', 'red');
+  });
+  
+  
+});
+</script>
+</head>
+<body>
+<h1>Header-0</h1>
+<h1>Header-1</h1>
+<h1>Header-2</h1>
+
+<div>
+  <h2>Header 1</h2>
+  <p>Paragraph</p>
+</div>
+<div>
+  <h2>Header 2</h2>
+  <p>Paragraph</p>
+</div>
+<div>
+  <h2>Header 3</h2>
+  <p>Paragraph</p>
+</div>
+
+<canvas id="canvas" width="700" height="400">
+</canvas>
+
+<h3>Start: </h3>
+<h3>Start: </h3>
+
+<h4>
+  <a href="http://www.daum.net">daum</a>
+</h4>
+</body>
+</html>
