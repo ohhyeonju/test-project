@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>180919-1 jQuery 이벤트</title>
+<style>
+.outer {
+  width: 200px;
+  height: 200px;
+  background: orange;
+  padding: 50px;
+  margin: 10px;
+}
+.inner {
+  width: 100%;
+  height: 100%;
+  background: red;
+}
+</style>
+<script src="jquery-3.1.1.js"></script>
+<script type="text/javascript"> 
+$(document).ready(function () {
+  $('h1').on('click', function () {
+    var length = $('h1').length;
+    var targetHTML = $(this).html();
+    $('#wrap').append('<h1>' + length + ' ~ ' + targetHTML + '</h1>');
+  });
+  
+  $('#wrap').on('click', 'h1', function () {
+    var length = $('h1').length;
+    var targetHTML = $(this).html();
+    $('#wrap').append('<h1>' + length + ' ~ ' + targetHTML + '</h1>');
+  });
+  
+  $(document).on('click', 'h1', function () {});
+  
+  $('#wrap').off('click', 'h1');
+  
+  $('.outer').mouseover(function() {
+    $('body').append('<h1>MOUSEOVER</h1>');
+  }).mouseenter(function () {
+    $('body').append('<h1>MOUSEENTER</h1>');
+  });
+  
+  $('textarea').keyup(function () {
+    var inputLength = $(this).val().length;
+    var remain = 150 - inputLength;
+    $('h2').html(remain);
+    if (remain >= 0) {
+      $('h2').css('color', 'black');
+    } else {
+      $('h2').css('color', 'red');
+    }
+  });
+  
+  // 스크롤 이벤트 발생 시
+  $(window).scroll(function () {
+    var scrollHeight = $(window).scrollTop() + $(window).height();
+    var documentHeight = $(document).height();
+    // 스크롤의 높이와 문서의 높이가 같을 때
+    if (scrollHeight == documentHeight - 200) {
+      for (var i = 0; i < 10; i++) {
+        $('<h1>Infinity Scroll</h1>').appendTo('body');
+      }
+    }
+  });
+  
+});
+</script>
+</head>
+<body>
+<div id="wrap">
+  <h1>Header</h1>
+</div>
+
+<div class="outer">
+  <div class="inner"></div>
+</div>
+
+<div>
+  <p>지금 내 생각을</p>
+  <h2>150</h2>
+  <textarea rows="5" cols="70"></textarea>
+</div>
+</body>
+</html>
