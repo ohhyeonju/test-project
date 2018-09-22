@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>180922-2 jQuery 효과</title>
+<style>
+.reverse {
+  color: white;
+  background-color: black;
+}
+
+#a {
+  background-color: red;
+  width: 150px; height: 150px;
+  position: relative;
+}
+
+* { margin: 0px; padding: 0px; }
+ul { list-style: none; }
+img { width: 500px; height: 350px; }
+
+.movement {
+  transition-duration: 2s;
+}
+</style>
+<script src="jquery-3.1.1.js"></script>
+<script src="jquery-ui-1.10.3.custom.min.js"></script>
+<script src="jquery.innerfade.js"></script>
+<script type="text/javascript"> 
+$(document).ready(function () {
+  $('.a').hover(function () {
+    $(this).addClass('reverse', 1000);
+  }, function () {
+    $(this).removeClass('reverse', 1000);
+  });
+  
+  $('button').click(function () {
+    var easing = $('select > option:selected').html();
+    $('#a').animate({
+      left: '400'
+    }, 2000, easing).animate({
+      left: '0'
+    }, 1000, easing);
+  });
+  
+  $('#inner-fade').innerfade({
+    animationtype: 'fade',
+    speed: 750,
+    timeout: 2000,
+    type: 'random',
+    containerheight: '350px'
+  });
+  
+  $('h1').click(function () {
+    $(this).css({
+      backgroundColor: 'red'
+    })
+  });
+});
+</script>
+</head>
+<body>
+<div class="a">
+  <h1>안녕안녕</h1>
+  <p>반갑반갑</p>
+</div>
+<div class="a">
+  <h1>안녕안녕</h1>
+  <p>반갑반갑</p>
+</div>
+<div class="a">
+  <h1>안녕안녕</h1>
+  <p>반갑반갑</p>
+</div>
+
+<select>
+  <option>linear</option>
+  <option>swing</option>
+  <option>easeInQuad</option>
+  <!-- 생략 -->
+  <option>easeInBounce</option>
+  <option>easeOutBounce</option>
+  <option>easeInOutBounce</option>
+</select>
+<button>MOVE</button>
+<div id="a"></div>
+
+<ul id="inner-fade">
+  <li><img src="Chrysanthemum.jpg" /></li>
+  <li><img src="Desert.jpg" /></li>
+  <li><img src="Hydrangeas.jpg" /></li>
+  <li><img src="Jellyfish.jpg" /></li>
+  <li><img src="Koala.jpg" /></li>
+  <li><img src="Lighthouse.jpg" /></li>
+  <li><img src="Penguins.jpg" /></li>
+</ul>
+
+<h1 class="movement">Animation</h1>
+</body>
+</html>
