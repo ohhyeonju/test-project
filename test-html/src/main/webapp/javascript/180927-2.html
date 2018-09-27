@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>180927-2 jQuery 이미지 슬라이더</title>
+<style>
+* { margin: 0px; padding: 0px; }
+/* Animation Canvas */
+.animation_canvas  {
+    overflow:hidden;
+    position:relative;           
+    width:600px; height:400px;
+}
+/* Slider Panel */
+.slider_panel { width:3000px; position:relative; }
+.slider_image { float:left; width:600px; height:400px; }
+
+/* Slider Text Panel */
+.slider_text_panel { position:absolute; top:200px; left:50px; }
+.slider_text { position:absolute; width:250px; height:150px; }
+
+/* Control Panel */
+.control_panel  {
+    position:absolute; top:380px; 
+    left:270px; height:13px; 
+    overflow:hidden; 
+}
+.control_button {
+    width:12px; height:46px;
+    position:relative; 
+
+    float:left; cursor:pointer;  
+    background:url('point_button.png');
+}
+.control_button:hover { top:-16px; }
+.control_button.active { top:-31px; }
+</style>
+<script src="jquery-3.1.1.js"></script>
+<script>
+$(document).ready(function () {
+  function moveSlider(index) {
+    var willMoveLeft = -(index * 600);
+    $('.slider_panel').animate({left: willMoveLeft}, 'slow');
+    
+    $('.control_button[data-index=' + index + ']').addClass('active');
+    $('.control_button[data-index!=' + index + ']').removeClass('active');
+    
+    $('.slider_text[data-index=' + index + ']').show().animate({
+      left: 0
+    }, 'slow');
+    
+    $('.slider_text[data-index!=' + index + ']').hide('slow', function () {
+      $(this).css('left', -300);
+    });
+  }
+  $('.slider_text').css('left', -300).each(function (index) {
+    $(this).attr('data-index', index);
+  });
+  
+  $('.control_button').each(function (index) {
+    $(this).attr('data-index', index);
+  }).click(function () {
+    var index = $(this).attr('data-index');
+    moveSlider(index);
+  });
+  
+  var randomNumber = Math.round(Math.random() * 4);
+  moveSlider(randomNumber);
+});
+</script>
+</head>
+<body>
+<h1>Test Header</h1>
+<div class="animation_canvas">
+  <div class="slider_panel">
+    <img src="Desert.jpg" class="slider_image"/>
+    <img src="Hydrangeas.jpg" class="slider_image"/>
+    <img src="Jellyfish.jpg" class="slider_image"/>
+    <img src="Koala.jpg" class="slider_image"/>
+    <img src="Lighthouse.jpg" class="slider_image"/>
+  </div>
+  <div class="slider_text_panel">
+    <div class="slider_text">
+      <h1>첫번재 이미지</h1>
+      <p>첫번째 이미지 입니다</p>
+    </div>
+    <div class="slider_text">
+      <h1>두번재 이미지</h1>
+      <p>두번째 이미지 입니다</p>
+    </div>
+    <div class="slider_text">
+      <h1>세번재 이미지</h1>
+      <p>세번째 이미지 입니다</p>
+    </div>
+    <div class="slider_text">
+      <h1>네번재 이미지</h1>
+      <p>네번째 이미지 입니다</p>
+    </div>
+    <div class="slider_text">
+      <h1>다섯번재 이미지</h1>
+      <p>다섯번째 이미지 입니다</p>
+    </div>
+  </div>
+  <div class="control_panel">
+    <div class="control_button"></div>
+    <div class="control_button"></div>
+    <div class="control_button"></div>
+    <div class="control_button"></div>
+    <div class="control_button"></div>
+  </div>
+</div>
+<h1>Test Header</h1>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>180927-1 jQuery 이미지 슬라이더</title>
+<style>
+* { margin: 0px; padding: 0px; }
+#canvas { 
+  background: gray; 
+  width: 600px;
+  height: 400px;
+  position: relative;
+  overflow: hidden;
+}
+.inner-box {
+  background: orange;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+}
+</style>
+<script src="jquery-3.1.1.js"></script>
+<script>
+$(document).ready(function () {
+  $('.inner-box').each(function (index) {
+    $(this).css({
+      left: index * 90,
+      top: index * 90
+    });
+  });
+});
+</script>
+</head>
+<body>
+<h1>Test Header</h1>
+<div id="canvas">
+  <div class="inner-box"></div>
+  <div class="inner-box"></div>
+  <div class="inner-box"></div>
+  <div class="inner-box"></div>
+  <div class="inner-box"></div>
+</div>
+<h1>Test Header</h1>
+</body>
+</html>
