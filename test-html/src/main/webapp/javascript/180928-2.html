@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>180928-2 jQuery 플러그인</title>
+<link rel="stylesheet" href="colorbox.css"/>
+<script src="jquery-3.1.1.js"></script>
+<script src="jquery.colorbox.js"></script>
+<script>
+$(document).ready(function () {
+  $('a').colorbox({
+    inline: true
+  }).click(function () {
+    setTimeout(function () {
+      $.colorbox.close();
+    }, 3000);
+  }).trigger('click');
+});
+</script>
+</head>
+<body>
+<h1>jQuery LightBox</h1>
+<a id="colorbox" href="#dialog">Dialog with Colorbox</a>
+<div id="dialogs" style="display:none;">
+  <div id="dialog">
+    <h1>Auto OPEN Colorbox</h1>
+    <p>이 라이트박스틑 3초 후에 자동으로 사라집니다.</p>
+  </div>
+</div>
+</body>
+</html>

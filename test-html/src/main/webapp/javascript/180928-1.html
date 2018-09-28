@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>180928-1 jQuery 플러그인</title>
+<link rel="stylesheet" href="colorbox.css"/>
+<script src="jquery-3.1.1.js"></script>
+<script src="jquery.colorbox.js"></script>
+<script>
+$(document).ready(function () {
+  //$('a.lightbox').colorbox();
+  //$('a[rel="lightbox"]').colorbox();
+  
+  /* $('a').colorbox({
+    transition: 'fade',
+    opacity: 0.0,
+    onOpen: function () {
+      alert('실행되었습니다.');
+    },
+    onClosed: function () {
+      console.log('닫힙니다.');
+    }
+  }); */
+  
+  $('a#colorbox').colorbox({
+    inline: true,
+    width: 550
+  });
+});
+</script>
+</head>
+<body>
+<h1>jQuery LightBox</h1>
+<a class="lightbox" rel="lightbox" title="Chrysanthemum" href="Chrysanthemum.jpg">Image-1</a>
+<a class="lightbox" rel="lightbox" title="Desert" href="Desert.jpg">Image-2</a>
+<a class="lightbox" rel="lightbox" title="Hydrangeas" href="Hydrangeas.jpg">Image-3</a>
+<a class="lightbox" rel="lightbox" title="Jellyfish" href="Jellyfish.jpg">Image-4</a>
+<a class="lightbox" rel="lightbox" title="Koala" href="Koala.jpg">Image-5</a>
+<a class="lightbox" rel="lightbox" title="Lighthouse" href="Lighthouse.jpg">Image-6</a>
+<a class="lightbox" rel="lightbox" title="Penguins" href="Penguins.jpg">Image-7</a>
+<a class="lightbox" rel="lightbox" title="Tulips" href="Tulips.jpg">Image-8</a>
+
+<a id="colorbox" href="#dialog">Dialog with Colorbox</a>
+<div id="dialogs" style="display:none;">
+  <div id="dialog">
+    <h1>Auto OPEN Colorbox</h1>
+    <p>ㅁㅁㅇ러나;ㅓㄹ만어리;ㅏㅁ너이ㅏ럼;니ㅏ얼;ㅏㅣ더;ㅣㅏㅓ나ㅣ얼;ㅣㅏㄴ어ㅣ럼;니아ㅓ린얾;ㅣ넝라ㅣ;너이ㅏ럼;ㅣ나얼;만이</p>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>180928-3 jQuery 플러그인</title>
+<style>
+* { margin: 0px; padding: 0px; }
+body { background-color:#525252; }
+.item  {
+    margin: 5px;
+    width: 100px; height: 100px;
+    background-color:white; border-radius: 10px; 
+    float: left;
+}
+.big { width: 210px; height: 430px; }
+.normal { width: 210px; height: 210px; }
+.small { width: 100px; height: 100px; }
+</style>
+<script src="jquery-3.1.1.js"></script>
+<script src="masonry.pkgd.min.js"></script>
+<script>
+$(document).ready(function () {
+  $('#masonry-container').masonry({
+    itemSelector: '.item',
+    columnWidth: 110,
+    isAnimated: true
+  });
+  
+  $(document).on('click', '.item', function (event) {
+    if (event.shiftKey) {
+        // 클릭한 대상을 제거합니다.
+        $('#masonry-container').masonry('remove', $(this));
+        $('#masonry-container').masonry('layout');
+    } else {
+        // 클릭한 대상을 복제합니다.
+        var item = $(this).clone();
+        $('#masonry-container').append(item);
+        $('#masonry-container').masonry('addItems', item);
+        $('#masonry-container').masonry('layout');
+    }
+  });
+});
+</script>
+</head>
+<body>
+<div id="masonry-container">
+  <div class="item small"></div>
+  <div class="item big"></div>
+  <div class="item normal"></div>
+  <div class="item small"></div>
+  <div class="item small"></div>
+  <div class="item small"></div>
+  <div class="item normal"></div>
+  <div class="item normal"></div>
+  <div class="item small"></div>
+  <div class="item small"></div>
+  <div class="item small"></div>
+</div>
+</body>
+</html>
