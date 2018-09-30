@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>180930-1 node.js 기본</title>
+<script src="jquery-3.1.1.js"></script>
+<script>
+var input = '';
+input += '가나다라마바, 일이삼사, 하나, 3000원\n';
+input += 'rkskekfk, 오육칠팔, 둘, 2000원\n';
+input += 'dlfdltka, 구십십일, 셋, 4000원';
+input = input.split('\n');
+for (var i = 0; i < input.length; i++) {
+  input[i] = input[i].split(',');
+  console.log(input[i])
+  for (var j = 0; j < input[i].length; j++) {
+    input[i][j] = input[i][j].trim();
+    console.log(input[i][j])
+  }
+}
+</script>
+</head>
+<body>
+</body>
+</html>
