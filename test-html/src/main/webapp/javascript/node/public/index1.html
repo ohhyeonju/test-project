@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>node.js express</title>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+  var request = new XMLHttpRequest();
+  request.open('GET', '/data.html', false);
+  //request.send();
+  console.log(request.responseText);
+  //document.body.innerHTML += request.responseText;
+  
+  request.open('GET', '/data.html', false);
+  request.open('GET', '/data.html', true);
+  var prevDate = new Date();
+  //request.send();
+  var nowDate = new Date();
+  console.log(nowDate - prevDate);
+  
+  request.onreadystatechange = function (event) {
+    console.log(request.readyState);
+    if (request.readyState == 4) {
+      if (request.status == 200) {
+        $('#xmlHttpRequest').append(request.responseText);
+        var json = eval('(' + request.responseText + ')');
+        json = JSON.parse(request.responseText);
+        var output = '';
+        for (var i = 0; i < json.length; i++) {
+          for (var key in json[i]) {
+            output += '<h1>' + i + ':' + json[i][key] + '</h1>';
+          }
+        }
+        $('#xmlHttpRequest').append(output);
+      }
+    }
+  };
+  request.open('GET', '/data.json', true);
+  request.send();
+</script>
+<script>
+  /* var request1 = new XMLHttpRequest();
+  request1.onreadystatechange = function(event) {
+    if (request1.readyState == 4) {
+      if (request1.status == 200) {
+        console.log(request1.responseXML);
+        var xml = request1.responseXML;
+        var names = xml.getElementByTagName('name');
+        var prices = xml.getElementByTagName('price');
+        for (var i = 0; i < names.length; i++) {
+          var name = names[i].childNodes[0].nodeValue;
+          var price = prices[i].childNodes[0].nodeValue;
+          $('#xmlHttpRequest').append('<h1>' + name + '</h1>');
+          $('#xmlHttpRequest').append('<h1>' + price + '</h1>');
+        }
+      }
+    }
+  }
+  request1.open('GET', '/data.xml', true);
+  request1.send(); */
+</script>
+<script>
+window.onload = function () {
+  document.getElementById('get').onclick = function () {
+    var request = new XMLHttpRequest();
+    request.open('GET', '/products', true);
+    //request.open('GET', '/products?dummy=' + new Date().getTime(), false);
+    request.send();
+    request.onreadystatechange = function (event) {
+      if (request.readyState == 4) {
+        if (request.status == 200) {
+          console.log(request.responseText)
+          document.getElementById('output').value = request.responseText;
+        }
+      }
+    }
+  }
+  $('#post').click(function () {
+    var name = document.getElementById('name').value;
+    var price = document.getElementById('price').value;
+    var request = new XMLHttpRequest();
+    request.open('POST', '/products', true);
+    request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    request.send('name=' + name + '&price=' + price);
+    request.onreadystatechange = function (event) {
+      if (request.readyState == 4) {
+        if (request.status == 200) {
+          console.log(request.responseText)
+          document.getElementById('output').value = request.responseText;
+        }
+      }
+    }
+  });
+  $('#put').click(function () {
+    var name = document.getElementById('name').value;
+    var price = document.getElementById('price').value;
+    var request = new XMLHttpRequest();
+    request.open('PUT', '/products/0', true);
+    request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    request.send('name=' + name + '&price=' + price);
+    request.onreadystatechange = function (event) {
+      if (request.readyState == 4) {
+        if (request.status == 200) {
+          console.log(request.responseText)
+          document.getElementById('output').value = request.responseText;
+        }
+      }
+    }
+  });
+  $('#delete').click(function () {
+    var request = new XMLHttpRequest();
+    request.open('DELETE', '/products/0', true);
+    request.send();
+    request.onreadystatechange = function (event) {
+      if (request.readyState == 4) {
+        if (request.status == 200) {
+          console.log(request.responseText)
+          document.getElementById('output').value = request.responseText;
+        }
+      }
+    }
+  });
+}
+</script>
+<script>
+  // XMLHttpRequest 객체를 생성하는 함수
+  function createRequest() {
+    try {
+      return new XMLHttpRequest();
+    } catch (exception) {
+      var versions = [ 'Msxml2.XMLHTTP.6.0', 'Msxml2.XMLHTTP.5.0',
+          'Msxml2.XMLHTTP.4.0', 'Msxml2.XMLHTTP.3.0', 'Msxml2.XMLHTTP',
+          'Microsoft.XMLHttp' ];
+      for (var i = 0; i < versions.length; i++) {
+        try {
+          return new ActiveXObject(versions[i]);
+        } catch (e) {
+        }
+      }
+    }
+  }
+</script>
+
+</head>
+<body>
+<h1>XMLHttpRequest</h1>
+<div id="xmlHttpRequest"></div>
+<button id="get">GET</button>
+<button id="post">POST</button>
+<button id="put">PUT</button>
+<button id="delete">DELETE</button>
+<h1>input</h1>
+<input id="name"/>
+<input id="price"/>
+<h1>output</h1>
+<textarea id="output" disabled="disabled" cols="40" rows="5"></textarea>
+
+<hr>
+<h1>Data Process</h1>
+<form action="/products" method="get">
+  <fieldset>
+    <legend>GET</legend>
+    <input type="submit"/>
+  </fieldset>
+</form>
+<form action="/products" method="post">
+  <fieldset>
+    <legend>POST</legend>
+    <input name="name"/>
+    <input name="price"/>
+    <input type="submit"/>
+  </fieldset>
+</form>
+
+<hr>
+<h1>index.html</h1>
+<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+It has survived not only five centuries, but also the leap into electronic typesetting, 
+remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
+and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+It has survived not only five centuries, but also the leap into electronic typesetting, 
+remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
+and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+</body>
+</html>

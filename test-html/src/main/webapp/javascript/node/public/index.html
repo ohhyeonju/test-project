@@ -2,149 +2,156 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>node.js express</title>
+<title>jQuery Ajax</title>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
-  var request = new XMLHttpRequest();
-  request.open('GET', '/data.html', false);
-  //request.send();
-  console.log(request.responseText);
-  //document.body.innerHTML += request.responseText;
+$(document).ready(function() {
+  /* $.ajax('/data.html', {
+    success : function(data) {
+      $('body').append(data);
+    }
+  }); 
   
-  request.open('GET', '/data.html', false);
-  request.open('GET', '/data.html', true);
-  var prevDate = new Date();
-  //request.send();
-  var nowDate = new Date();
-  console.log(nowDate - prevDate);
+  $.ajax({
+    url: '/data.html',
+    success: function (data) {
+      $('body').append(data);
+    }
+  });
+
+  $.ajax({
+    url: '/parameter',
+    type: 'GET',
+    data: {
+      name: 'test',
+      region: 'test'
+    },
+    success: function (data) {
+      $('body').append(data);
+    }
+  });
   
-  request.onreadystatechange = function (event) {
-    console.log(request.readyState);
-    if (request.readyState == 4) {
-      if (request.status == 200) {
-        $('#xmlHttpRequest').append(request.responseText);
-        var json = eval('(' + request.responseText + ')');
-        json = JSON.parse(request.responseText);
-        var output = '';
-        for (var i = 0; i < json.length; i++) {
-          for (var key in json[i]) {
-            output += '<h1>' + i + ':' + json[i][key] + '</h1>';
-          }
-        }
-        $('#xmlHttpRequest').append(output);
-      }
+  $.get('/data.html', function (data) {
+    $('body').html(data);
+  });
+  
+  $('body').load('/data.html');
+  
+  $.getJSON('/data.json', function (data) {
+    $.each(data, function (key, value) {
+      $('body').append('<h1>' + value.name + ':' + value.price + '</h1>');
+    });
+  });
+  
+  $.ajax({
+    url: 'data.xml',
+    success: function (data) {
+      $(data).find('product').each(function () {
+        var name = $(this).find('name').text()
+        var price = $(this).find('price').text()
+        $('<h1></h1>').text(name + ':' + price).appendTo('body')
+      });
     }
-  };
-  request.open('GET', '/data.json', true);
-  request.send();
-</script>
-<script>
-  /* var request1 = new XMLHttpRequest();
-  request1.onreadystatechange = function(event) {
-    if (request1.readyState == 4) {
-      if (request1.status == 200) {
-        console.log(request1.responseXML);
-        var xml = request1.responseXML;
-        var names = xml.getElementByTagName('name');
-        var prices = xml.getElementByTagName('price');
-        for (var i = 0; i < names.length; i++) {
-          var name = names[i].childNodes[0].nodeValue;
-          var price = prices[i].childNodes[0].nodeValue;
-          $('#xmlHttpRequest').append('<h1>' + name + '</h1>');
-          $('#xmlHttpRequest').append('<h1>' + price + '</h1>');
-        }
+  }); */
+  
+  $('#get').click(function () {
+    $.ajax({
+      url: '/products',
+      type: 'get',
+      dataType: 'text',
+      success: function (data) {
+        $('#output').val(data);
       }
-    }
-  }
-  request1.open('GET', '/data.xml', true);
-  request1.send(); */
-</script>
-<script>
-window.onload = function () {
-  document.getElementById('get').onclick = function () {
-    var request = new XMLHttpRequest();
-    request.open('GET', '/products', true);
-    //request.open('GET', '/products?dummy=' + new Date().getTime(), false);
-    request.send();
-    request.onreadystatechange = function (event) {
-      if (request.readyState == 4) {
-        if (request.status == 200) {
-          console.log(request.responseText)
-          document.getElementById('output').value = request.responseText;
-        }
-      }
-    }
-  }
+    });
+  });
   $('#post').click(function () {
-    var name = document.getElementById('name').value;
-    var price = document.getElementById('price').value;
-    var request = new XMLHttpRequest();
-    request.open('POST', '/products', true);
-    request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    request.send('name=' + name + '&price=' + price);
-    request.onreadystatechange = function (event) {
-      if (request.readyState == 4) {
-        if (request.status == 200) {
-          console.log(request.responseText)
-          document.getElementById('output').value = request.responseText;
-        }
+    $.ajax({
+      url: '/products',
+      type: 'post',
+      dataType: 'text',
+      data: {
+        name: $('#name').val(),
+        price: $('#price').val()
+      },
+      success: function (data) {
+        $('#output').val(data);
       }
-    }
+    });
   });
   $('#put').click(function () {
-    var name = document.getElementById('name').value;
-    var price = document.getElementById('price').value;
-    var request = new XMLHttpRequest();
-    request.open('PUT', '/products/0', true);
-    request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    request.send('name=' + name + '&price=' + price);
-    request.onreadystatechange = function (event) {
-      if (request.readyState == 4) {
-        if (request.status == 200) {
-          console.log(request.responseText)
-          document.getElementById('output').value = request.responseText;
-        }
+    $.ajax({
+      url: '/products/0',
+      type: 'put',
+      dataType: 'text',
+      data: {
+        name: $('#name').val(),
+        price: $('#price').val()
+      },
+      success: function (data) {
+        $('#output').val(data);
       }
-    }
+    });
   });
   $('#delete').click(function () {
-    var request = new XMLHttpRequest();
-    request.open('DELETE', '/products/0', true);
-    request.send();
-    request.onreadystatechange = function (event) {
-      if (request.readyState == 4) {
-        if (request.status == 200) {
-          console.log(request.responseText)
-          document.getElementById('output').value = request.responseText;
-        }
+    $.ajax({
+      url: '/products/0',
+      type: 'delete',
+      dataType: 'text',
+      success: function (data) {
+        $('#output').val(data);
       }
-    }
+    });
   });
-}
+  
+  var data = {
+      name: 'hhh',
+      region: 'Seoul'
+  };
+  $('<h1></h1>').text($.param(data)).appendTo('body');
+  
+  $('#my-form').submit(function (event) {
+    /* var name = $('#name1').val();
+    var region = $('#region').val();
+    
+    var url = '/parameter?name=' + name + '&region=' + region;
+    $('#wrap').load(url);
+    
+    url = '/parameter';
+    var data = { name: name, region: region };
+    var params = $.param(data);
+    $('#wrap').load(url, params);
+    
+    $('#wrap').load(url, data);
+    
+    $('#wrap').load('/parameter', $(this).serialize());
+    
+    $('#wrap').load('/parameter', $(this).serializeArray()); */
+    
+    var serialize = $(this).serialize();
+    var serializeArray = $(this).serializeArray();
+    $('<h1></h1>').text(serialize).appendTo('#wrap');
+    $('<h1></h1>').text(serializeArray).appendTo('#wrap');
+    event.preventDefault();
+  });
+  
+  $(document).ajaxComplete(function () {
+    $('#ajax-event').append('<h1>AjaxComplete</h1>');
+  }).ajaxError(function () {
+    $('#ajax-event').append('<h1>AjaxError</h1>');
+  }).ajaxError(function () {
+    $('#ajax-event').append('<h1>AjaxError</h1>');
+  }).ajaxSend(function () {
+    $('#ajax-event').append('<h1>AjaxSend</h1>');
+  }).ajaxSuccess(function () {
+    $('#ajax-event').append('<h1>AjaxSuccess</h1>');
+  }).ajaxStart(function () {
+    $('#ajax-event').append('<h1>AjaxStart</h1>');
+  });
+  $('#wrap1').load('/data.json');
+});
 </script>
-<script>
-  // XMLHttpRequest 객체를 생성하는 함수
-  function createRequest() {
-    try {
-      return new XMLHttpRequest();
-    } catch (exception) {
-      var versions = [ 'Msxml2.XMLHTTP.6.0', 'Msxml2.XMLHTTP.5.0',
-          'Msxml2.XMLHTTP.4.0', 'Msxml2.XMLHTTP.3.0', 'Msxml2.XMLHTTP',
-          'Microsoft.XMLHttp' ];
-      for (var i = 0; i < versions.length; i++) {
-        try {
-          return new ActiveXObject(versions[i]);
-        } catch (e) {
-        }
-      }
-    }
-  }
-</script>
-
 </head>
 <body>
-<h1>XMLHttpRequest</h1>
-<div id="xmlHttpRequest"></div>
 <button id="get">GET</button>
 <button id="post">POST</button>
 <button id="put">PUT</button>
@@ -153,38 +160,26 @@ window.onload = function () {
 <input id="name"/>
 <input id="price"/>
 <h1>output</h1>
-<textarea id="output" disabled="disabled" cols="40" rows="5"></textarea>
-
+<textarea id="output" disabled cols="40" rows="5"></textarea>
 <hr>
-<h1>Data Process</h1>
-<form action="/products" method="get">
-  <fieldset>
-    <legend>GET</legend>
-    <input type="submit"/>
-  </fieldset>
-</form>
-<form action="/products" method="post">
-  <fieldset>
-    <legend>POST</legend>
-    <input name="name"/>
-    <input name="price"/>
-    <input type="submit"/>
-  </fieldset>
-</form>
 
+<form id="my-form">
+  <table>
+	<tr>
+	  <td><label for="name1">Name</label></td>
+	  <td><input id="name1" name="name1" type="text" /></td>
+	</tr>
+	<tr>
+	  <td><label for="region">Region</label></td>
+	  <td><input id="region" name="region" type="text" /></td>
+	</tr>
+  </table>
+  <input type="submit" value="Get Ajax String" />
+</form>
+<div id="wrap"></div>
 <hr>
-<h1>index.html</h1>
-<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-It has survived not only five centuries, but also the leap into electronic typesetting, 
-remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
-and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-It has survived not only five centuries, but also the leap into electronic typesetting, 
-remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
-and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+
+<div id="ajax-event"></div>
+<div id="wrap1"></div>
 </body>
 </html>
