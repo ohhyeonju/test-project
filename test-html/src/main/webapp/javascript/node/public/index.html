@@ -2,60 +2,60 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>DB basic</title>
+<title>크로스 도메인</title>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script type="text/javascript">
+<!-- <script src="https://api.github.com/users/jquery/repos"></script> -->
+<script>
+function test(input) {
+  console.log(input.data);
+  //alert(input.data);
+}
+
+window.test = function (input) {
+  console.log(input.data);
+}
+var script = document.createElement('script');
+script.src = 'https://api.github.com/users/jquery/repos?callback=test';
+document.head.appendChild(script);
+
 $(document).ready(function () {
-  function selectData() {
-    $('#output').empty();
-    
-    $.getJSON('/products', function (data) {
-      $(data).each(function (index, item) {
-        var output = '';
-        output += '<tr>';
-        output += '  <td>' + item.id + '</td>';
-        output += '  <td>' + item.name + '</td>';
-        output += '  <td>' + item.modelnumber + '</td>';
-        output += '  <td>' + item.series + '</td>';
-        output += '</tr>';
-        $('#output').append(output);
+  $.ajax('https://api.github.com/users/jquery/repos', {
+    dataType: 'jsonp',
+    success: function (input) {
+      $.each(input.data, function (index, item) {
+        var a = $('<h2></h2>').html(item.name);
+        var b = $('<a></a>').attr('href', item.html_url).html(item.html_url);
+        var c = $('<hr/>');
+        $('<div></div>').append(a, b, c).appendTo('body');
       });
-    });
-  }
-  
-  $('#insert_form').submit(function (event) {
-    var data = $(this).serialize();
-    $.post('/products', data, selectData);
-    
-    event.preventDefault();
+    }
   });
-  
-  selectData();
+});
+
+$.getJSON('https://api.github.com/users/jquery/repos', function (data) {
+  console.log(data);
+});
+
+$.ajax({
+  url: '/data.json',
+  dataType: 'jsonp',
+  success: function (data) {
+    console.log(JSON.stringify(data));
+  }
+});
+</script>
+<script src="https://api.github.com/users/jquery/repos?callback=test"></script>
+<script>
+$(document).ready(function () {
+  $.ajax({
+    url: '/data.redirect1',
+    success: function (data) {
+      $('body').text(data);
+    }
+  });
 });
 </script>
 </head>
 <body>
-<form id="insert_form">
-<fieldset>
-  <legend>데이터 추가</legend>
-  <table>
-	<tr>
-	  <td><label>상품명</label></td>
-	  <td><input name="name" type="text" /></td>
-	</tr>
-	<tr>
-	  <td><label>모델 번호</label></td>
-	  <td><input name="modelnumber" type="text" /></td>
-	</tr>
-	<tr>
-      <td><label>시리즈</label></td>
-      <td><input name="series" type="text" /></td>
-    </tr>
-  </table>
-  <input type="submit" value="추가" />
-</fieldset>
-</form>
-<h1>Product</h1>
-<table id="output" border="1"></table>
 </body>
 </html>
