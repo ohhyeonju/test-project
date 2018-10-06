@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>크로스 도메인</title>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<!-- <script src="https://api.github.com/users/jquery/repos"></script> -->
+<script>
+function test(input) {
+  console.log(input.data);
+  //alert(input.data);
+}
+
+window.test = function (input) {
+  console.log(input.data);
+}
+var script = document.createElement('script');
+script.src = 'https://api.github.com/users/jquery/repos?callback=test';
+document.head.appendChild(script);
+
+$(document).ready(function () {
+  $.ajax('https://api.github.com/users/jquery/repos', {
+    dataType: 'jsonp',
+    success: function (input) {
+      $.each(input.data, function (index, item) {
+        var a = $('<h2></h2>').html(item.name);
+        var b = $('<a></a>').attr('href', item.html_url).html(item.html_url);
+        var c = $('<hr/>');
+        $('<div></div>').append(a, b, c).appendTo('body');
+      });
+    }
+  });
+});
+
+$.getJSON('https://api.github.com/users/jquery/repos', function (data) {
+  console.log(data);
+});
+
+$.ajax({
+  url: '/data.json',
+  dataType: 'jsonp',
+  success: function (data) {
+    console.log(JSON.stringify(data));
+  }
+});
+</script>
+<script src="https://api.github.com/users/jquery/repos?callback=test"></script>
+<script>
+$(document).ready(function () {
+  $.ajax({
+    url: '/data.redirect1',
+    success: function (data) {
+      $('body').text(data);
+    }
+  });
+});
+</script>
+</head>
+<body>
+</body>
+</html>
