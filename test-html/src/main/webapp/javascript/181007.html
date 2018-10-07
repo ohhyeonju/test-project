@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>181007 쿠키와 저장소</title>
+<script src="jquery-3.1.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script>
+function setCookie(name, value, day) {
+	var date = new Date();
+	date.setDate(date.getDate() + 7);
+	for (var i = 0; i < 5; i++) {
+		var willCookie = '';
+		willCookie += name + '=' + encodeURIComponent(value) + ';';
+		willCookie += 'expires=' + date.toUTCString() + '';
+		document.cookie = willCookie;
+	}
+	console.log(document.cookie);
+}
+
+function getCookie(name) {
+	var cookies = document.cookie.split(';');
+	console.log(cookies);
+	for (var i in cookies) {
+	  if (cookies[i].search(name) != -1) {
+	    return decodeURIComponent(cookies[i].replace(name + '=', ''));
+	  }
+    }
+}
+
+function removeCookie(name) {
+  var date = new Date();
+  date.setDate(date.getDate() - 1);
+  var willCookie = '';
+  willCookie += name + '=remove;';
+  willCookie += 'expires=' + date.toUTCString();
+  document.cookie = willCookie;
+}
+</script>
+<script>
+removeCookie('Cookie');
+console.log(getCookie('Cookie'));
+setCookie('Cookie', 'Cheese', 7);
+console.log(getCookie('Cookie'));
+removeCookie('Cookie');
+</script>
+<script>
+$(document).ready(function () {
+  Cookies.set('MyKey', 'Hello');
+  console.log(Cookies.get('MyKey'));
+  
+  Cookies.set('MyKey', null);
+  console.log(document.Cookies);
+  
+  Cookies.set('MyKey', '안녕', {
+    expires: 7,
+    path: '/',
+    raw: true
+  });
+  Cookies.get('MyKey');
+  
+  
+  
+  function printLocalStorage() {
+    $('div').empty();
+    for (var key in localStorage) {
+      $('<h1></h1>').html(key + ': ' + localStorage[key]).appendTo('div');
+    }
+  }
+  if (window.localStorage) {
+    printLocalStorage();
+    $('input:button').click(function () {
+      var key = $('#key').val();
+      var value = $('#value').val();
+      localStorage.setItem(key, value);
+      printLocalStorage();
+    });
+  } else {
+    console.log('로컬 저장소를 사용할 수 없는 브라우저입니다.');
+  }
+});
+</script>
+</head>
+<body>
+<input type="text" id="key" />
+<input type="text" id="value" />
+<input type="button" value="저장" />
+<div id="output"></div>
+</body>
+</html>
