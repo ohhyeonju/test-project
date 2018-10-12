@@ -130,7 +130,7 @@ public class App {
                 }
             } else {
                 System.out.println("명령어가 올바르지 않습니다.");
-            }
+            } 
             System.out.println();
         }
         
