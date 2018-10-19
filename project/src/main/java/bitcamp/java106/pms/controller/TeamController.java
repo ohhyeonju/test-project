@@ -12,6 +12,22 @@ public class TeamController {
     static Team[] teams = new Team[100];
     static int teamIndex = 0;
     
+    public static void service(String menu, String option) {
+        if(menu.equals("team/add")) {
+            onTeamAdd();
+        } else if (menu.equals("team/list")) {
+            onTeamList();
+        } else if (menu.equals("team/view")) {
+            onTeamView(option);
+        } else if (menu.equals("team/update")) {
+            onTeamUpdate(option);
+        } else if (menu.equals("team/delete")) {
+            onTeamDelete(option);
+        } else {
+            System.out.println("명령어가 올바르지 않습니다.");
+        }
+    }
+    
     static int getTeamIndex(String name) {
         for (int i = 0; i < teamIndex; i++) {
             if (teams[i] == null) continue;
@@ -22,7 +38,7 @@ public class TeamController {
         return -1;
     }
     
-    public static void onTeamAdd() {
+    static void onTeamAdd() {
         Team team = new Team();
         
         System.out.print("팀명? ");
@@ -44,7 +60,7 @@ public class TeamController {
         teams[teamIndex++] = team;
     }
     
-    public static void onTeamList() {
+    static void onTeamList() {
         System.out.println("[팀 목록]");
         for (int i = 0; i < teamIndex; i++) {
             if (teams[i] == null) continue;
@@ -54,7 +70,7 @@ public class TeamController {
         }
     }
     
-    public static void onTeamView(String name) {
+    static void onTeamView(String name) {
         if (name == null) {
             System.out.println("팀명을 입력하시기 바랍니다.");
             System.out.println();
@@ -73,7 +89,7 @@ public class TeamController {
         }
     }
     
-    public static void onTeamUpdate(String name) {
+    static void onTeamUpdate(String name) {
         System.out.println("팀 정보 변경");
         if (name == null) {
             System.out.println("팀명을 입력하시기 바랍니다.");
@@ -100,7 +116,7 @@ public class TeamController {
         }
     }
     
-    public static void onTeamDelete(String name) {
+    static void onTeamDelete(String name) {
         System.out.println("팀 정보 삭제");
         if (name == null) {
             System.out.println("팀명을 입력하시기 바랍니다.");

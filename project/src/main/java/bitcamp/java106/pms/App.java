@@ -47,29 +47,13 @@ public class App {
                 break;
             } else if (menu.equals("help")) {
                 onHelp();
-            } else if(menu.equals("team/add")) {
-                TeamController.onTeamAdd();
-            } else if (menu.equals("team/list")) {
-                TeamController.onTeamList();
-            } else if (menu.equals("team/view")) {
-                TeamController.onTeamView(option);
-            } else if (menu.equals("team/update")) {
-                TeamController.onTeamUpdate(option);
-            } else if (menu.equals("team/delete")) {
-                TeamController.onTeamDelete(option);
-            } else if (menu.equals("member/add")) {
-                MemberController.onMemberAdd();
-            } else if (menu.equals("member/list")) {
-                MemberController.onMemberList();
-            } else if (menu.equals("member/view")) {
-                MemberController.onMemberView(option);
-            } else if (menu.equals("member/update")) {
-                MemberController.onMemberUpdate(option);
-            } else if (menu.equals("member/delete")) {
-                MemberController.onMemberDelete(option);
+            } else if(menu.startsWith("team/")) {
+                TeamController.service(menu, option);
+            } else if(menu.startsWith("member/")) {
+                MemberController.service(menu, option);
             } else {
                 System.out.println("명령어가 올바르지 않습니다.");
-            } 
+            }
             System.out.println();
         }
 
