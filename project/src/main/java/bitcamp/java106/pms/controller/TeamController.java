@@ -7,12 +7,12 @@ import bitcamp.java106.pms.util.Console;
 
 public class TeamController {
     
-    public static Scanner keyScan;
+    public Scanner keyScan;
     
-    static Team[] teams = new Team[100];
-    static int teamIndex = 0;
+    Team[] teams = new Team[100];
+    int teamIndex = 0;
     
-    public static void service(String menu, String option) {
+    public void service(String menu, String option) {
         if(menu.equals("team/add")) {
             onTeamAdd();
         } else if (menu.equals("team/list")) {
@@ -28,7 +28,7 @@ public class TeamController {
         }
     }
     
-    static int getTeamIndex(String name) {
+    int getTeamIndex(String name) {
         for (int i = 0; i < teamIndex; i++) {
             if (teams[i] == null) continue;
             if (name.equals(teams[i].name.toLowerCase())) {
@@ -38,7 +38,7 @@ public class TeamController {
         return -1;
     }
     
-    static void onTeamAdd() {
+    void onTeamAdd() {
         Team team = new Team();
         
         System.out.print("팀명? ");
@@ -60,7 +60,7 @@ public class TeamController {
         teams[teamIndex++] = team;
     }
     
-    static void onTeamList() {
+    void onTeamList() {
         System.out.println("[팀 목록]");
         for (int i = 0; i < teamIndex; i++) {
             if (teams[i] == null) continue;
@@ -70,7 +70,7 @@ public class TeamController {
         }
     }
     
-    static void onTeamView(String name) {
+    void onTeamView(String name) {
         if (name == null) {
             System.out.println("팀명을 입력하시기 바랍니다.");
             System.out.println();
@@ -89,7 +89,7 @@ public class TeamController {
         }
     }
     
-    static void onTeamUpdate(String name) {
+    void onTeamUpdate(String name) {
         System.out.println("팀 정보 변경");
         if (name == null) {
             System.out.println("팀명을 입력하시기 바랍니다.");
@@ -116,7 +116,7 @@ public class TeamController {
         }
     }
     
-    static void onTeamDelete(String name) {
+    void onTeamDelete(String name) {
         System.out.println("팀 정보 삭제");
         if (name == null) {
             System.out.println("팀명을 입력하시기 바랍니다.");

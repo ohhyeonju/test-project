@@ -7,12 +7,12 @@ import bitcamp.java106.pms.util.Console;
 
 public class MemberController {
     
-    public static Scanner keyScan;
+    public Scanner keyScan;
     
-    static Member[] members = new Member[100];
-    static int memberIndex = 0;
+    Member[] members = new Member[100];
+    int memberIndex = 0;
     
-    public static void service(String menu, String option) {
+    public void service(String menu, String option) {
         if (menu.equals("member/add")) {
             onMemberAdd();
         } else if (menu.equals("member/list")) {
@@ -28,7 +28,7 @@ public class MemberController {
         }
     }
     
-    static int getMemberIndex(String id) {
+    int getMemberIndex(String id) {
         for (int i = 0; i < memberIndex; i++) {
             if (members[i] == null) continue;
             if (id.equals(members[i].id.toLowerCase())) {
@@ -38,7 +38,7 @@ public class MemberController {
         return -1;
     }
     
-    static void onMemberAdd() {
+    void onMemberAdd() {
         Member member = new Member();
         
         System.out.print("아이디? ");
@@ -53,14 +53,14 @@ public class MemberController {
         members[memberIndex++] = member;
     }
     
-    static void onMemberList() {
+    void onMemberList() {
         for (int i = 0; i < memberIndex; i++) {
             if (members[i] == null) continue;
             System.out.printf("%s, %s, %s\n",
                     members[i].id, members[i].email, members[i].password);
         }
     }
-    static void onMemberView(String id) {
+    void onMemberView(String id) {
         if (id == null) {
             System.out.println("팀명을 입력하세요");
             System.out.println();
@@ -77,7 +77,7 @@ public class MemberController {
         }
     }
     
-    static void onMemberUpdate(String id) {
+    void onMemberUpdate(String id) {
         if (id == null) {
             System.out.println("팀명을 입력하세요");
             return;
@@ -98,7 +98,7 @@ public class MemberController {
         }
     }
     
-    static void onMemberDelete(String id) {
+    void onMemberDelete(String id) {
         if (id == null) {
             System.out.println("팀명을 입력하세요");
             return;

@@ -6,12 +6,12 @@ import bitcamp.java106.pms.domain.Board;
 import bitcamp.java106.pms.util.Console;
 
 public class BoardController {
-    public static Scanner keyScan;
+    public Scanner keyScan;
     
-    static Board[] boards = new Board[100];
-    static int boardIndex = 0;
+    Board[] boards = new Board[100];
+    int boardIndex = 0;
     
-    public static void service(String menu, String option) {
+    public void service(String menu, String option) {
         if (menu.equals("board/add")) {
             onBoardAdd();
         } else if (menu.equals("board/list")) {
@@ -27,7 +27,7 @@ public class BoardController {
         }
     }
     
-    static void onBoardAdd() {
+    void onBoardAdd() {
         System.out.println("[게시물 입력]");
         Board board = new Board();
         
@@ -41,7 +41,7 @@ public class BoardController {
         boards[boardIndex++] = board;
     }
     
-    static void onBoardList() {
+    void onBoardList() {
         System.out.println("[게시물 목록]");
         for (int i = 0; i < boardIndex; i++) {
             if (boards[i] == null) continue;
@@ -50,7 +50,7 @@ public class BoardController {
         }
     }
     
-    static void onBoardView(String option) {
+    void onBoardView(String option) {
         System.out.println("[게시물 조회]");
         if (option == null) {
             System.out.println("번호를 입력하시기 바랍니다.");
@@ -69,7 +69,7 @@ public class BoardController {
         }
     }
     
-    static void onBoardUpdate(String option) {
+    void onBoardUpdate(String option) {
         System.out.println("[게시물 변경]");
         if (option == null) {
             System.out.println("번호를 입력하시기 바랍니다.");
@@ -93,7 +93,7 @@ public class BoardController {
         }
     }
     
-    static void onBoardDelete(String option) {
+    void onBoardDelete(String option) {
         System.out.println("[게시물 삭제]");
         if (option == null) {
             System.out.println("번호를 입력하시기 바랍니다.");
