@@ -7,10 +7,14 @@ import bitcamp.java106.pms.util.Console;
 
 public class TeamController {
     
-    public Scanner keyScan;
+    Scanner keyScan;
     
     Team[] teams = new Team[100];
     int teamIndex = 0;
+    
+    public TeamController(Scanner scanner) {
+        this.keyScan = scanner;
+    }
     
     public void service(String menu, String option) {
         if(menu.equals("team/add")) {

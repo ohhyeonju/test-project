@@ -7,10 +7,14 @@ import bitcamp.java106.pms.util.Console;
 
 public class MemberController {
     
-    public Scanner keyScan;
+    Scanner keyScan;
     
     Member[] members = new Member[100];
     int memberIndex = 0;
+    
+    public MemberController(Scanner scanner) {
+        this.keyScan = scanner;
+    }
     
     public void service(String menu, String option) {
         if (menu.equals("member/add")) {

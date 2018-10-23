@@ -28,12 +28,9 @@ public class App {
     }
 
     public static void main(String[] args) {
-        TeamController teamController = new TeamController();
-        teamController.keyScan = keyScan;
-        MemberController memberController = new MemberController();
-        memberController.keyScan = keyScan;
-        BoardController boardController = new BoardController();
-        boardController.keyScan = keyScan;
+        TeamController teamController = new TeamController(keyScan);
+        MemberController memberController = new MemberController(keyScan);
+        BoardController boardController = new BoardController(keyScan);
         Console.keyScan = keyScan;
 
         while (true) {

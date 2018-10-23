@@ -6,10 +6,14 @@ import bitcamp.java106.pms.domain.Board;
 import bitcamp.java106.pms.util.Console;
 
 public class BoardController {
-    public Scanner keyScan;
+    Scanner keyScan;
     
     Board[] boards = new Board[100];
     int boardIndex = 0;
+    
+    public BoardController(Scanner scanner) {
+        this.keyScan = scanner;
+    }
     
     public void service(String menu, String option) {
         if (menu.equals("board/add")) {
