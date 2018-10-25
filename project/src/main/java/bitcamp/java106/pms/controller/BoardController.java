@@ -1,5 +1,6 @@
 package bitcamp.java106.pms.controller;
 
+import java.sql.Date;
 import java.util.Scanner;
 
 import bitcamp.java106.pms.domain.Board;
@@ -40,7 +41,7 @@ public class BoardController {
         System.out.print("내용? ");
         board.content = keyScan.nextLine();
         System.out.print("작성일? ");
-        board.createdDate = keyScan.nextLine();
+        board.createdDate = Date.valueOf(keyScan.nextLine());
         
         boards[boardIndex++] = board;
     }

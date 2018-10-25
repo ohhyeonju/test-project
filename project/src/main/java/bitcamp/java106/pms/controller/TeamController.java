@@ -1,5 +1,6 @@
 package bitcamp.java106.pms.controller;
 
+import java.sql.Date;
 import java.util.Scanner;
 
 import bitcamp.java106.pms.domain.Team;
@@ -56,10 +57,10 @@ public class TeamController {
         keyScan.nextLine(); 
 
         System.out.print("시작일? ");
-        team.startDate = keyScan.nextLine();
+        team.startDate = Date.valueOf(keyScan.nextLine());
 
         System.out.print("종료일? ");
-        team.endDate = keyScan.nextLine();
+        team.endDate = Date.valueOf(keyScan.nextLine());
         
         teams[teamIndex++] = team;
     }
@@ -113,9 +114,9 @@ public class TeamController {
             updateTeam.maxQty = keyScan.nextInt();
             keyScan.nextLine();
             System.out.printf("시작일(%s)? ", team.startDate);
-            updateTeam.startDate = keyScan.nextLine();
+            updateTeam.startDate = Date.valueOf(keyScan.nextLine());
             System.out.printf("종료일(%s)? ", team.endDate);
-            updateTeam.endDate = keyScan.nextLine();
+            updateTeam.endDate = Date.valueOf(keyScan.nextLine());
             teams[i] = updateTeam;
         }
     }
