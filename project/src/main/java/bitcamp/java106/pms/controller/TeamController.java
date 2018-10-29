@@ -10,10 +10,11 @@ import bitcamp.java106.pms.util.Console;
 public class TeamController {
     
     Scanner keyScan;
-    TeamDao teamDao = new TeamDao();
+    TeamDao teamDao;
     
-    public TeamController(Scanner scanner) {
+    public TeamController(Scanner scanner, TeamDao teamDao) {
         this.keyScan = scanner;
+        this.teamDao = teamDao;
     }
     
     public void service(String menu, String option) {

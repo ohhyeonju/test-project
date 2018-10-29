@@ -9,10 +9,11 @@ import bitcamp.java106.pms.util.Console;
 public class MemberController {
     
     Scanner keyScan;
-    MemberDao memberDao = new MemberDao();
+    MemberDao memberDao;
     
-    public MemberController(Scanner scanner) {
+    public MemberController(Scanner scanner, MemberDao memberDao) {
         this.keyScan = scanner;
+        this.memberDao = memberDao;
     }
     
     public void service(String menu, String option) {
@@ -56,8 +57,7 @@ public class MemberController {
     }
     void onMemberView(String id) {
         if (id == null) {
-            System.out.println("팀명을 입력하세요");
-            System.out.println();
+            System.out.println("아이디을 입력하세요");
             return;
         }
         Member member = memberDao.get(id);

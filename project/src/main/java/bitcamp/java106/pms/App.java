@@ -5,6 +5,9 @@ import java.util.Scanner;
 import bitcamp.java106.pms.controller.BoardController;
 import bitcamp.java106.pms.controller.MemberController;
 import bitcamp.java106.pms.controller.TeamController;
+import bitcamp.java106.pms.controller.TeamMemberController;
+import bitcamp.java106.pms.dao.MemberDao;
+import bitcamp.java106.pms.dao.TeamDao;
 import bitcamp.java106.pms.util.Console;
 
 public class App {
@@ -28,8 +31,13 @@ public class App {
     }
 
     public static void main(String[] args) {
-        TeamController teamController = new TeamController(keyScan);
-        MemberController memberController = new MemberController(keyScan);
+        TeamDao teamDao = new TeamDao();
+        MemberDao memberDao = new MemberDao();
+        
+        TeamController teamController = new TeamController(keyScan, teamDao);
+        MemberController memberController = new MemberController(keyScan, memberDao);
+        TeamMemberController teamMemberController = new TeamMemberController(
+                keyScan, teamDao, memberDao);
         BoardController boardController = new BoardController(keyScan);
         Console.keyScan = keyScan;
 
@@ -49,6 +57,8 @@ public class App {
                 break;
             } else if (menu.equals("help")) {
                 onHelp();
+            } else if (menu.startsWith("team/member/")) {
+                teamMemberController.service(menu, option);
             } else if(menu.startsWith("team/")) {
                 teamController.service(menu, option);
             } else if(menu.startsWith("member/")) {
