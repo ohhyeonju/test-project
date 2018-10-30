@@ -37,20 +37,20 @@ public class TeamController {
         Team team = new Team();
         
         System.out.print("팀명? ");
-        team.name = keyScan.nextLine();
+        team.setName(keyScan.nextLine());
         
         System.out.print("설명? ");
-        team.description = keyScan.nextLine();
+        team.setDescription(keyScan.nextLine());
 
         System.out.print("최대인원? ");
-        team.maxQty = keyScan.nextInt();
+        team.setMaxQty(keyScan.nextInt());
         keyScan.nextLine(); 
 
         System.out.print("시작일? ");
-        team.startDate = Date.valueOf(keyScan.nextLine());
+        team.setStartDate(Date.valueOf(keyScan.nextLine()));
 
         System.out.print("종료일? ");
-        team.endDate = Date.valueOf(keyScan.nextLine());
+        team.setEndDate(Date.valueOf(keyScan.nextLine()));
         
         teamDao.insert(team);
     }
@@ -61,8 +61,8 @@ public class TeamController {
         for (int i = 0; i < list.length; i++) {
             if (list[i] == null) continue;
             System.out.printf("%s, %d, %s ~ %s\n",
-                    list[i].name, list[i].maxQty,
-                    list[i].startDate, list[i].endDate);
+                    list[i].getName(), list[i].getMaxQty(),
+                    list[i].getStartDate(), list[i].getEndDate());
         }
     }
     
@@ -76,11 +76,11 @@ public class TeamController {
         if (team == null) {
             System.out.println("해당 이름의 팀이 없습니다.");
         } else {
-            System.out.printf("팀명: %s\n", team.name);
-            System.out.printf("설명: %s\n", team.description);
-            System.out.printf("최대인원: %d\n", team.maxQty);
+            System.out.printf("팀명: %s\n", team.getName());
+            System.out.printf("설명: %s\n", team.getDescription());
+            System.out.printf("최대인원: %d\n", team.getMaxQty());
             System.out.printf("기간: %s ~ %s\n", 
-                    team.startDate, team.endDate);
+                    team.getStartDate(), team.getEndDate());
         }
     }
     
@@ -95,17 +95,17 @@ public class TeamController {
             System.out.println("해당 이름의 팀이 없습니다.");
         } else {
             Team updateTeam = new Team();
-            System.out.printf("팀명(%s)? \n", team.name);
-            updateTeam.name = team.name;
-            System.out.printf("설명(%s)? ", team.description);
-            updateTeam.description = keyScan.nextLine();
-            System.out.printf("최대인원(%d)? ", team.maxQty);
-            updateTeam.maxQty = keyScan.nextInt();
+            System.out.printf("팀명(%s)? \n", team.getName());
+            updateTeam.setName(team.getName());
+            System.out.printf("설명(%s)? ", team.getDescription());
+            updateTeam.setDescription(keyScan.nextLine());
+            System.out.printf("최대인원(%d)? ", team.getMaxQty());
+            updateTeam.setMaxQty(keyScan.nextInt());
             keyScan.nextLine();
-            System.out.printf("시작일(%s)? ", team.startDate);
-            updateTeam.startDate = Date.valueOf(keyScan.nextLine());
-            System.out.printf("종료일(%s)? ", team.endDate);
-            updateTeam.endDate = Date.valueOf(keyScan.nextLine());
+            System.out.printf("시작일(%s)? ", team.getStartDate());
+            updateTeam.setStartDate(Date.valueOf(keyScan.nextLine()));
+            System.out.printf("종료일(%s)? ", team.getEndDate());
+            updateTeam.setEndDate(Date.valueOf(keyScan.nextLine()));
             teamDao.update(updateTeam);
         }
     }

@@ -21,7 +21,7 @@ public class MemberDao {
     private int getMemberIndex(String id) {
         for (int i = 0; i < this.memberIndex; i++) {
             if (this.members[i] == null) continue;
-            if (id.equals(members[i].id.toLowerCase())) {
+            if (id.equals(members[i].getId().toLowerCase())) {
                 return i;
             }
         }
@@ -36,7 +36,7 @@ public class MemberDao {
     }
     
     public void update(Member member) {
-        int i = this.getMemberIndex(member.id);
+        int i = this.getMemberIndex(member.getId());
         if (i != -1)
             this.members[i] = member;
     }

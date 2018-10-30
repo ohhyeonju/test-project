@@ -7,7 +7,7 @@ public class BoardDao {
     int boardIndex = 0;
     
     public void insert(Board board) {
-        board.no = boardIndex;
+        board.setNo(boardIndex);
         this.boards[this.boardIndex++] = board;
     }
     
@@ -26,7 +26,7 @@ public class BoardDao {
     }
     
     public void update(Board board) {
-        boards[board.no] = board;
+        boards[board.getNo()] = board;
     }
     
     public void delete(int i) {

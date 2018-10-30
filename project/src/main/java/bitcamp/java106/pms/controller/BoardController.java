@@ -36,11 +36,11 @@ public class BoardController {
         Board board = new Board();
         
         System.out.print("제목? ");
-        board.title = keyScan.nextLine();
+        board.setTitle(keyScan.nextLine());
         System.out.print("내용? ");
-        board.content = keyScan.nextLine();
+        board.setContent(keyScan.nextLine());
         System.out.print("작성일? ");
-        board.createdDate = Date.valueOf(keyScan.nextLine());
+        board.setCreatedDate(Date.valueOf(keyScan.nextLine()));
         
         boardDao.insert(board);
     }
@@ -51,7 +51,7 @@ public class BoardController {
         for (int i = 0; i < list.length; i++) {
             if (list[i] == null) continue;
             System.out.printf("%d, %s, %s\n", 
-                    i, list[i].title, list[i].createdDate);
+                    i, list[i].getTitle(), list[i].getCreatedDate());
         }
     }
     
@@ -67,9 +67,9 @@ public class BoardController {
         if (board == null) {
             System.out.println("유효하지 않은 게시물번호입니다.");
         } else {
-            System.out.printf("제목: %s\n", board.title);
-            System.out.printf("설명: %s\n", board.content);
-            System.out.printf("등록일: %s\n", board.createdDate);
+            System.out.printf("제목: %s\n", board.getTitle());
+            System.out.printf("설명: %s\n", board.getContent());
+            System.out.printf("등록일: %s\n", board.getCreatedDate());
         }
     }
     
@@ -86,11 +86,12 @@ public class BoardController {
             System.out.println("유효하지 않은 게시물번호입니다.");
         } else {
             Board updateBoard = new Board();
-            System.out.printf("제목(%s)", board.title);
-            updateBoard.title = keyScan.nextLine();
-            System.out.printf("설명(%s)", board.content);
-            updateBoard.content = keyScan.nextLine();
-            updateBoard.createdDate = board.createdDate;
+            System.out.printf("제목(%s)", board.getTitle());
+            updateBoard.setTitle(keyScan.nextLine());
+            System.out.printf("설명(%s)", board.getContent());
+            updateBoard.setContent(keyScan.nextLine());
+            updateBoard.setCreatedDate(board.getCreatedDate());
+            updateBoard.setNo(board.getNo());
             boardDao.update(updateBoard);
             System.out.println("변경하였습니다.");
         }
