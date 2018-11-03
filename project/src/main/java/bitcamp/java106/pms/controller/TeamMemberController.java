@@ -82,7 +82,6 @@ public class TeamMemberController {
         String[] members = teamMemberDao.getMembers(teamName);
         
         for (int i = 0; i <members.length; i++) {
-            if (members[i] == null) continue;
             System.out.printf("%s, ", members[i]);
         }
         System.out.println();

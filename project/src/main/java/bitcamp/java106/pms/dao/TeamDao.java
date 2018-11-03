@@ -1,27 +1,27 @@
 package bitcamp.java106.pms.dao;
 
 import bitcamp.java106.pms.domain.Team;
+import bitcamp.java106.pms.util.ArrayList;
 
 public class TeamDao {
-    Team[] teams = new Team[100];
-    int teamIndex = 0;
+    ArrayList collection = new ArrayList(); 
     
     public void insert(Team team) {
-        this.teams[this.teamIndex++] = team;
+        collection.add(team);
     }
     
     public Team[] list() {
-        Team[] arr = new Team[teamIndex];
-        for (int i = 0; i < teamIndex; i++) {
-            arr[i] = teams[i];
+        Team[] arr = new Team[collection.size()];
+        for (int i = 0; i < collection.size(); i++) {
+            arr[i] = (Team) collection.get(i);
         }
         return arr;
     }
     
     private int getTeamIndex(String name) {
-        for (int i = 0; i < this.teamIndex; i++) {
-            if (this.teams[i] == null) continue;
-            if (name.equals(teams[i].getName().toLowerCase())) {
+        for (int i = 0; i < this.collection.size(); i++) {
+            if (name.toLowerCase().equals(
+                    ((Team) collection.get(i)).getName().toLowerCase())) {
                 return i;
             }
         }
@@ -32,18 +32,18 @@ public class TeamDao {
         int i = getTeamIndex(name);
         if (i == -1) 
             return null;
-        return teams[i];
+        return (Team) collection.get(i);
     }
     
     public void update(Team team) {
         int i = getTeamIndex(team.getName());
         if (i != -1)
-            teams[i] = team;
+            collection.set(i, team);
     }
     
     public void delete(String name) {
         int i = getTeamIndex(name);
         if (i != -1)
-            teams[i] = null;
+            collection.remove(i);
     }
 }

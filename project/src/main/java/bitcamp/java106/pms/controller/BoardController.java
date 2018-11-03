@@ -48,10 +48,9 @@ public class BoardController {
     void onBoardList() {
         System.out.println("[게시물 목록]");
         Board[] list = boardDao.list();
-        for (int i = 0; i < list.length; i++) {
-            if (list[i] == null) continue;
+        for (Board board : list) {
             System.out.printf("%d, %s, %s\n", 
-                    i, list[i].getTitle(), list[i].getCreatedDate());
+                    board.getNo(), board.getTitle(), board.getCreatedDate());
         }
     }
     

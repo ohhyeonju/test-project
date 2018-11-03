@@ -3,10 +3,16 @@ package bitcamp.java106.pms.domain;
 import java.sql.Date;
 
 public class Board {
+    private static int count = 1;
+    
     private int no;
     private String title;
     private String content;
     private Date createdDate;
+    
+    public Board() {
+        this.no= count++;
+    }
     
     public int getNo() {
         return no;

@@ -1,35 +1,51 @@
 package bitcamp.java106.pms.dao;
 
 import bitcamp.java106.pms.domain.Board;
+import bitcamp.java106.pms.util.ArrayList;
 
 public class BoardDao {
-    Board[] boards = new Board[100];
-    int boardIndex = 0;
+    private ArrayList collection = new ArrayList();
     
     public void insert(Board board) {
-        board.setNo(boardIndex);
-        this.boards[this.boardIndex++] = board;
+        this.collection.add(board);
     }
     
     public Board[] list() {
-        Board[] arr = new Board[boardIndex];
-        for (int i = 0; i < boardIndex; i++) {
-            arr[i] = boards[i];
+        Board[] arr = new Board[collection.size()];
+        for (int i = 0; i < collection.size(); i++) {
+            arr[i] = (Board) collection.get(i);
         }
         return arr;
     }
     
-    public Board get(int i) {
-        if (i < 0 || i >= boardIndex) 
+    private int getBoardIndex(int no) {
+        for (int i = 0; i < collection.size(); i++) {
+            Board originBoard = (Board) collection.get(i);
+            if (originBoard.getNo() == no) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    
+    public Board get(int no) {
+        int index = this.getBoardIndex(no);
+        if (index < 0) 
             return null;
-        return boards[i];
+        return (Board) collection.get(index);
     }
     
     public void update(Board board) {
-        boards[board.getNo()] = board;
+        int index = this.getBoardIndex(board.getNo());
+        if (index < 0) 
+            return;
+        collection.set(index, board);
     }
     
-    public void delete(int i) {
-        boards[i] = null;
+    public void delete(int no) {
+        int index = this.getBoardIndex(no);
+        if (index < 0) 
+            return;
+        collection.remove(index);
     }
 }

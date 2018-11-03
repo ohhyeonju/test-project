@@ -50,7 +50,6 @@ public class MemberController {
     void onMemberList() {
         Member[] list = memberDao.list();
         for (int i = 0; i < list.length; i++) {
-            if (list[i] == null) continue;
             System.out.printf("%s, %s, %s\n",
                     list[i].getId(), list[i].getEmail(), 
                     list[i].getPassword());
