@@ -1,10 +1,11 @@
 package bitcamp.java106.pms.dao;
 
+import java.util.LinkedList;
+
 import bitcamp.java106.pms.domain.Board;
-import bitcamp.java106.pms.util.ArrayList;
 
 public class BoardDao {
-    private ArrayList collection = new ArrayList();
+    private LinkedList<Board> collection = new LinkedList<>();
     
     public void insert(Board board) {
         this.collection.add(board);

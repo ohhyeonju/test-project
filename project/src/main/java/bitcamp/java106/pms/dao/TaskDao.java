@@ -1,10 +1,11 @@
 package bitcamp.java106.pms.dao;
 
+import java.util.LinkedList;
+
 import bitcamp.java106.pms.domain.Task;
-import bitcamp.java106.pms.util.ArrayList;
 
 public class TaskDao {
-    private ArrayList collection = new ArrayList();
+    private LinkedList<Task> collection = new LinkedList<>();
     
     public void insert(Task task) {
         collection.add(task);

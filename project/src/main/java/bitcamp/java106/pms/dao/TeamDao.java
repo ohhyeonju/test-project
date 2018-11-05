@@ -1,10 +1,11 @@
 package bitcamp.java106.pms.dao;
 
+import java.util.LinkedList;
+
 import bitcamp.java106.pms.domain.Team;
-import bitcamp.java106.pms.util.ArrayList;
 
 public class TeamDao {
-    ArrayList collection = new ArrayList(); 
+    private LinkedList<Team> collection = new LinkedList<>(); 
     
     public void insert(Team team) {
         collection.add(team);
