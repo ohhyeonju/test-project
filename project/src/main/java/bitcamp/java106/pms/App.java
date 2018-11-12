@@ -1,10 +1,12 @@
 package bitcamp.java106.pms;
 
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import bitcamp.java106.pms.controller.BoardController;
 import bitcamp.java106.pms.controller.ClassroomController;
+import bitcamp.java106.pms.controller.Controller;
 import bitcamp.java106.pms.controller.MemberController;
 import bitcamp.java106.pms.controller.TaskController;
 import bitcamp.java106.pms.controller.TeamController;
@@ -55,6 +57,15 @@ public class App {
                 keyScan, teamDao, taskDao, teamMemberDao, memberDao);
         ClassroomController classroomController = new ClassroomController(keyScan);
         Console.keyScan = keyScan;
+        
+        HashMap<String,Controller> controllerMap = new HashMap<>();
+        
+        controllerMap.put("board", boardController);
+        controllerMap.put("classroom", classroomController);
+        controllerMap.put("member", memberController);
+        controllerMap.put("task", taskController);
+        controllerMap.put("team", teamController);
+        controllerMap.put("team/member", teamMemberController);
 
         while (true) {
             String[] input = Console.prompt();
@@ -72,20 +83,16 @@ public class App {
                 break;
             } else if (menu.equals("help")) {
                 onHelp();
-            } else if (menu.startsWith("team/member/")) {
-                teamMemberController.service(menu, option);
-            } else if(menu.startsWith("team/")) {
-                teamController.service(menu, option);
-            } else if(menu.startsWith("member/")) {
-                memberController.service(menu, option);
-            } else if(menu.startsWith("board/")) {
-                boardController.service(menu, option);
-            } else if(menu.startsWith("task/")) {
-                taskController.service(menu, option);
-            } else if(menu.startsWith("classroom/")) {
-                classroomController.service(menu, option);
             } else {
-                System.out.println("명령어가 올바르지 않습니다.");
+                int slashIndex = menu.lastIndexOf("/");
+                String controllerKey = menu.substring(0, slashIndex);
+                Controller controller = controllerMap.get(controllerKey);
+                
+                if (controller != null) {
+                    controller.service(menu, option);
+                } else {
+                    System.out.println("명령어가 올바르지 않습니다.");
+                }
             }
             System.out.println();
         }

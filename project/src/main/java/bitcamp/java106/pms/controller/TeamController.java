@@ -7,7 +7,7 @@ import bitcamp.java106.pms.dao.TeamDao;
 import bitcamp.java106.pms.domain.Team;
 import bitcamp.java106.pms.util.Console;
 
-public class TeamController {
+public class TeamController implements Controller {
     
     Scanner keyScan;
     TeamDao teamDao;
