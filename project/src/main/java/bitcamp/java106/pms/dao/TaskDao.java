@@ -1,65 +1,30 @@
 package bitcamp.java106.pms.dao;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import bitcamp.java106.pms.domain.Task;
 
-public class TaskDao {
-    private LinkedList<Task> collection = new LinkedList<>();
+public class TaskDao extends AbstractDao<Task> {
     
-    public void insert(Task task) {
-        collection.add(task);
-    }
-    
-    private int count(String teamName) {
-        int cnt = 0;
-        for (int i = 0; i < collection.size(); i++) {
-            Task task = (Task) collection.get(i);
-            if (task.getTeam().getName().toLowerCase().equals(
-                    teamName.toLowerCase())) {
-                cnt++;
+    public Iterator<Task> list(String teamName) {
+        ArrayList<Task> tasks = new ArrayList<>();
+        for (Task task : collection) {
+            if (task.getTeam().getName().equalsIgnoreCase(teamName)) {
+                tasks.add(task);
             }
         }
-        return cnt++;
+        return tasks.iterator();
     }
     
-    public Task[] list(String teamName) {
-        Task[] arr = new Task[this.count(teamName)];
-        for (int i = 0, x = 0; i < collection.size(); i++) {
-            Task task = (Task) collection.get(i);
-            if (task.getTeam().getName().toLowerCase().equals(
-                    teamName.toLowerCase())) {
-                arr[x++] = task;
-            }
-        }
-        return arr;
-    }
-    
-    private int getTaskIndex(int taskNo) {
+    public int indexOf(Object key) {
+        int taskNo = (Integer) key;
         for (int i = 0; i < collection.size(); i++) {
-            Task task = (Task) collection.get(i);
+            Task task = collection.get(i);
             if (task.getNo() == taskNo) {
                 return i;
             }
         }
         return -1;
-    }
-    
-    public Task get(int taskNo) {
-        int index = this.getTaskIndex(taskNo);
-        if (index < 0) return null;
-        return (Task) collection.get(index);
-    }
-    
-    public void update(Task task) {
-        int index = this.getTaskIndex(task.getNo());
-        if (index < 0) return;
-        collection.set(index, task);
-    }
-    
-    public void delete(int taskNo) {
-        int index = this.getTaskIndex(taskNo);
-        if (index < 0) return;
-        collection.remove(index);
     }
 }

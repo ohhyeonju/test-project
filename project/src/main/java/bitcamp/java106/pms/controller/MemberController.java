@@ -1,5 +1,6 @@
 package bitcamp.java106.pms.controller;
 
+import java.util.Iterator;
 import java.util.Scanner;
 
 import bitcamp.java106.pms.dao.MemberDao;
@@ -48,11 +49,12 @@ public class MemberController implements Controller {
     }
     
     void onMemberList() {
-        Member[] list = memberDao.list();
-        for (int i = 0; i < list.length; i++) {
+        Iterator<Member> iterator = memberDao.list();
+        while (iterator.hasNext()) {
+            Member memeber = iterator.next();
             System.out.printf("%s, %s, %s\n",
-                    list[i].getId(), list[i].getEmail(), 
-                    list[i].getPassword());
+                    memeber.getId(), memeber.getEmail(), 
+                    memeber.getPassword());
         }
     }
     void onMemberView(String id) {
@@ -86,7 +88,9 @@ public class MemberController implements Controller {
             updateMember.setEmail(keyScan.nextLine());
             System.out.printf("암호? ");
             updateMember.setPassword(keyScan.nextLine());
-            memberDao.update(updateMember);
+            
+            int index = memberDao.indexOf(member.getId());
+            memberDao.update(index, updateMember);
             System.out.println("변경하였습니다.");
         }
     }
