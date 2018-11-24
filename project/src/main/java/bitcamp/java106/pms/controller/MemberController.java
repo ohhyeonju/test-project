@@ -3,10 +3,12 @@ package bitcamp.java106.pms.controller;
 import java.util.Iterator;
 import java.util.Scanner;
 
+import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.dao.MemberDao;
 import bitcamp.java106.pms.domain.Member;
 import bitcamp.java106.pms.util.Console;
 
+@Component("Member")
 public class MemberController implements Controller {
     
     Scanner keyScan;

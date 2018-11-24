@@ -4,17 +4,19 @@ import java.sql.Date;
 import java.util.Iterator;
 import java.util.Scanner;
 
+import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.dao.ClassroomDao;
 import bitcamp.java106.pms.domain.Classroom;
 import bitcamp.java106.pms.util.Console;
 
+@Component("classroom")
 public class ClassroomController implements Controller {
     Scanner keyScan;
+    ClassroomDao classroomDao;
     
-    ClassroomDao classroomDao = new ClassroomDao();
-    
-    public ClassroomController(Scanner scanner) {
+    public ClassroomController(Scanner scanner, ClassroomDao classroomDao) {
         this.keyScan = scanner;
+        this.classroomDao = classroomDao;
     }
             
     public void service(String menu, String option) {

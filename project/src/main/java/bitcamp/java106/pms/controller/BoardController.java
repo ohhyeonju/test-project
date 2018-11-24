@@ -4,16 +4,19 @@ import java.sql.Date;
 import java.util.Iterator;
 import java.util.Scanner;
 
+import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.dao.BoardDao;
 import bitcamp.java106.pms.domain.Board;
 import bitcamp.java106.pms.util.Console;
 
+@Component("board")
 public class BoardController implements Controller {
     Scanner keyScan;
-    BoardDao boardDao = new BoardDao();
+    BoardDao boardDao;
     
-    public BoardController(Scanner scanner) {
+    public BoardController(Scanner scanner, BoardDao boardDao) {
         this.keyScan = scanner;
+        this.boardDao = boardDao;
     }
     
     public void service(String menu, String option) {
