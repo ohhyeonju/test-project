@@ -1,16 +1,10 @@
 package bitcamp.java106.pms;
 
-import java.sql.Date;
 import java.util.HashMap;
 import java.util.Scanner;
 
 import bitcamp.java106.pms.context.ApplicationContext;
 import bitcamp.java106.pms.controller.Controller;
-import bitcamp.java106.pms.dao.MemberDao;
-import bitcamp.java106.pms.dao.TeamDao;
-import bitcamp.java106.pms.dao.TeamMemberDao;
-import bitcamp.java106.pms.domain.Member;
-import bitcamp.java106.pms.domain.Team;
 import bitcamp.java106.pms.util.Console;
 
 public class App {
@@ -43,9 +37,6 @@ public class App {
         
         iocContainer = new ApplicationContext(
                 "bitcamp.java106.pms", defaultBeans);
-        
-        prepareMemberData();
-        prepareTeamData();
         
         Console.keyScan = keyScan;
 
@@ -80,73 +71,5 @@ public class App {
 
             System.out.println(); 
         }
-    }
-    static void prepareMemberData() {
-        MemberDao memberDao = (MemberDao) iocContainer.getBean(
-                "bitcamp.java106.pms.dao.MemberDao");
-        
-        Member member = new Member();
-        member.setId("aaa");
-        member.setEmail("aaa@test.com");
-        member.setPassword("1111");
-        
-        memberDao.insert(member);
-        
-        member = new Member();
-        member.setId("bbb");
-        member.setEmail("bbb@test.com");
-        member.setPassword("1111");
-        
-        memberDao.insert(member);
-        
-        member = new Member();
-        member.setId("ccc");
-        member.setEmail("ccc@test.com");
-        member.setPassword("1111");
-        
-        memberDao.insert(member);
-        
-        member = new Member();
-        member.setId("ddd");
-        member.setEmail("ddd@test.com");
-        member.setPassword("1111");
-        
-        memberDao.insert(member);
-        
-        member = new Member();
-        member.setId("eee");
-        member.setEmail("eee@test.com");
-        member.setPassword("1111");
-        
-        memberDao.insert(member);
-    }
-    
-    static void prepareTeamData() {
-        
-        TeamDao teamDao = (TeamDao) iocContainer.getBean(
-                "bitcamp.java106.pms.dao.TeamDao");
-        TeamMemberDao teamMemberDao = (TeamMemberDao) iocContainer.getBean(
-                "bitcamp.java106.pms.dao.TeamMemberDao");
-        
-        Team team = new Team();
-        team.setName("t1");
-        team.setMaxQty(5);
-        team.setStartDate(Date.valueOf("2018-1-1"));
-        team.setEndDate(Date.valueOf("2018-5-30"));
-        teamDao.insert(team);
-        teamMemberDao.addMember("t1", "aaa");
-        teamMemberDao.addMember("t1", "bbb");
-        teamMemberDao.addMember("t1", "ccc");
-        
-        team = new Team();
-        team.setName("t2");
-        team.setMaxQty(5);
-        team.setStartDate(Date.valueOf("2018-2-1"));
-        team.setEndDate(Date.valueOf("2018-6-30"));
-        teamDao.insert(team);
-        teamMemberDao.addMember("t2", "ccc");
-        teamMemberDao.addMember("t2", "ddd");
-        teamMemberDao.addMember("t2", "eee");
-        
     }
 }
