@@ -28,17 +28,24 @@ public class App {
         TaskDao taskDao = (TaskDao) iocContainer.getBean(TaskDao.class);
         TeamDao teamDao = (TeamDao) iocContainer.getBean(TeamDao.class);
         TeamMemberDao teamMemberDao = (TeamMemberDao) iocContainer.getBean(TeamMemberDao.class);
-        try {
-            boardDao.save();
-            classroomDao.save();
-            memberDao.save();
-            taskDao.save();
-            teamDao.save();
-            teamMemberDao.save();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("게시물 데이터 저장 중 오류 발생!");
-        }
+       
+        try { boardDao.save(); }
+        catch (Exception e) { System.out.println("게시물 데이터 저장 중 오류 발생!"); }
+        
+        try { classroomDao.save(); }
+        catch (Exception e) { System.out.println("수업 데이터 저장 중 오류 발생!"); }
+        
+        try { memberDao.save(); }
+        catch (Exception e) { System.out.println("회원 데이터 저장 중 오류 발생!"); }
+        
+        try { taskDao.save(); }
+        catch (Exception e) { System.out.println("작업 데이터 저장 중 오류 발생!"); }
+        
+        try { teamDao.save(); }
+        catch (Exception e) { System.out.println("팀 데이터 저장 중 오류 발생!"); }
+        
+        try { teamMemberDao.save(); }
+        catch (Exception e) { System.out.println("팀멤버 데이터 저장 중 오류 발생!"); }
     }
 
     static void onHelp() {
@@ -79,16 +86,24 @@ public class App {
             } else if (menu.equals("help")) {
                 onHelp();
             } else {
-                int slashIndex = menu.lastIndexOf("/");
-                String controllerKey = (slashIndex < 0) ? 
-                        menu : menu.substring(0, slashIndex);
-                
-                Controller controller = (Controller) iocContainer.getBean(controllerKey);
-                
-                if (controller != null) {
-                    controller.service(menu, option);
-                } else {
-                    System.out.println("명령어가 올바르지 않습니다.");
+                try {
+                    int slashIndex = menu.lastIndexOf("/");
+                    String controllerKey = (slashIndex < 0) ? 
+                            menu : menu.substring(0, slashIndex);
+                    
+                    Controller controller = (Controller) iocContainer.getBean(controllerKey);
+                    
+                    if (controller != null) {
+                        controller.service(menu, option);
+                    } else {
+                        System.out.println("명령어가 올바르지 않습니다.");
+                    }
+                } catch (Exception e) {
+                    if (keyScan.hasNextLine()) {
+                        keyScan.nextLine(); 
+                    }
+                    System.out.println("작업 실행 중에 오류가 발생하였습니다.");
+                    System.out.println("명령을 다시 실행해주세요!");
                 }
             }
 

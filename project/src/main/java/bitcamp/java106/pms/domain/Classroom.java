@@ -12,7 +12,7 @@ public class Classroom {
     private String room;
     
     public Classroom() {
-        this.no = ++count;
+        this.no = count++;
     }
     
     @Override
