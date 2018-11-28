@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -137,5 +138,14 @@ public class ApplicationContext {
     
     public Object getBean(String name) {
         return objPool.get(name);
+    }
+    
+    public Object getBean(Class type) {
+        Collection objList = objPool.values();
+        for (Object obj : objList) {
+            if (obj.getClass() == type) 
+                return obj;
+        }
+        return null;
     }
 }
