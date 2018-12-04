@@ -1,14 +1,14 @@
 package bitcamp.java106.pms.dao;
 
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Set;
 
 import bitcamp.java106.pms.annotation.Component;
 
@@ -21,37 +21,29 @@ public class TeamMemberDao {
         load();
     }
     
+    @SuppressWarnings("unchecked")
     public void load() throws Exception {
-        Scanner in = new Scanner(new FileReader("data/teammember.csv"));
-        while (true) {
+        try (
+                ObjectInputStream in = new ObjectInputStream(
+                        new BufferedInputStream(
+                                new FileInputStream("data/teammember.data")));
+            ) {
             try {
-                String[] arr = in.nextLine().split(":");
-                String[] idList = arr[1].split(",");
-                ArrayList<String> list = new ArrayList<>();
-                for (String id : idList) {
-                    list.add(id);
-                }
-                collection.put(arr[0], list);
+                collection = (HashMap<String,ArrayList<String>>) in.readObject();
             } catch (Exception e) {
-                //e.printStackTrace();
-                break;
+                collection = new HashMap<>();
             }
         }
-        in.close();
     }
     
     public void save() throws Exception {
-        PrintWriter out = new PrintWriter(new FileWriter("data/teammember.csv"));
-        Set<String> keyList = collection.keySet();
-        for (String key : keyList) {
-            List<String> idList = collection.get(key);
-            out.printf("%s:", key);
-            for (String id : idList) {
-                out.printf("%s,", id);
-            }
-            out.println();
+        try (
+                ObjectOutputStream out = new ObjectOutputStream(
+                        new BufferedOutputStream(
+                                new FileOutputStream("data/teammember.data")));
+            ) {
+            out.writeObject(collection);
         }
-        out.close();
     }
     
     public int addMember(String teamName, String memberId) {

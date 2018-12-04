@@ -1,11 +1,12 @@
 package bitcamp.java106.pms.dao;
 
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.sql.Date;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Iterator;
-import java.util.Scanner;
 
 import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.domain.Board;
@@ -18,35 +19,34 @@ public class BoardDao extends AbstractDao<Board> {
     }
     
     public void load() throws Exception {
-        Scanner in = new Scanner(new FileReader("data/board.csv"));
-        while (true) {
-            try {
-                String[] arr = in.nextLine().split(",");
-                Board board = new Board();
-                board.setNo(Integer.parseInt(arr[0]));
-                board.setTitle(arr[1]);
-                board.setContent(arr[2]);
-                board.setCreatedDate(Date.valueOf(arr[3]));
-                this.insert(board);
-            } catch (Exception e) {
-                //e.printStackTrace();
-                break;
+        try (
+                ObjectInputStream in = new ObjectInputStream(
+                        new BufferedInputStream(
+                                new FileInputStream("data/board.data")));
+            ) {
+            while (true) {
+                try {
+                    this.insert((Board) in.readObject());
+                } catch (Exception e) {
+                    //e.printStackTrace();
+                    break;
+                }
             }
         }
-        in.close();
     }
     
     public void save() throws Exception {
-        PrintWriter out = new PrintWriter(new FileWriter("data/board.csv"));
-        
-        Iterator<Board> boards = this.list();
-       
-        while (boards.hasNext()) {
-            Board board = boards.next();
-            out.printf("%d,%s,%s,%s\n", board.getNo(), board.getTitle(),
-                    board.getContent(), board.getCreatedDate());
+        try (
+                ObjectOutputStream out = new ObjectOutputStream(
+                        new BufferedOutputStream(
+                                new FileOutputStream("data/board.data")));
+            ) {
+            Iterator<Board> boards = this.list();
+            
+            while (boards.hasNext()) {
+                out.writeObject(boards.next());
+            }
         }
-        out.close();
     }
     
     @Override
